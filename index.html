@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>CONFAZ · Consulta CEST | Convênio ICMS 142/18</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      background: #f4f7fc;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0b2b4f 0%, #0f3b6a 100%);
+      color: white;
+      padding: 2rem 1.5rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-bottom: 4px solid #c9a23b;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brasao {
+      background: white;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #0b2b4f;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .title h1 {
+      font-size: 1.8rem;
+      letter-spacing: -0.3px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .title .sub {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .sub span {
+      background: rgba(255,255,255,0.15);
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .badge {
+      background: #c9a23b;
+      color: #0b2b4f;
+      font-weight: 700;
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+    }
+
+    .main-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    .search-card {
+      background: white;
+      border-radius: 18px;
+      padding: 2rem 2rem 1.8rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04);
+      margin-bottom: 2rem;
+      border: 1px solid #e9eef2;
+    }
+
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .input-group {
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #334155;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .input-group input, .input-group select {
+      padding: 0.9rem 1.2rem;
+      border: 1.5px solid #d1d9e6;
+      border-radius: 14px;
+      font-size: 1rem;
+      background: #fafbfc;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: #0f3b6a;
+      box-shadow: 0 0 0 4px rgba(15,59,106,0.1);
+      background: white;
+    }
+
+    .btn {
+      background: #0f3b6a;
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(145deg, #1a4b7a, #0b2b4f);
+      box-shadow: 0 4px 10px rgba(11,43,79,0.3);
+      border: 1px solid #2d5f8a;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: linear-gradient(145deg, #1e5585, #0a2a4a);
+      box-shadow: 0 8px 16px rgba(11,43,79,0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: white;
+      color: #0f3b6a;
+      border: 1.5px solid #0f3b6a;
+      box-shadow: none;
+      font-weight: 600;
+    }
+
+    .btn-outline:hover {
+      background: #f0f4ff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #475569;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .result-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+      border: 1px solid #e9eef2;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 14px;
+      margin: 1rem 0 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      color: #0b2b4f;
+      border-bottom: 2px solid #dce3ea;
+    }
+
+    td {
+      padding: 0.9rem 1.2rem;
+      border-bottom: 1px solid #e9edf2;
+      color: #1e2b3c;
+    }
+
+    .cest-code {
+      font-weight: 700;
+      color: #075985;
+      background: #f0f9ff;
+      border-radius: 8px;
+      padding: 0.25rem 0.6rem;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+
+    .ncm-code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f8fafc;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 2.5rem;
+      color: #64748b;
+      font-size: 1rem;
+      background: #f8fafc;
+      border-radius: 14px;
+    }
+
+    footer {
+      background: #0b2b4f;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 0.8rem;
+      margin-top: 2rem;
+      border-top: 3px solid #c9a23b;
+    }
+
+    .highlight {
+      background: #fff3cd;
+      border-radius: 4px;
+      padding: 0 2px;
+    }
+
+    @media (max-width: 700px) {
+      .header {
+        padding: 1.5rem 1rem;
+      }
+      .search-card {
+        padding: 1.5rem;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <div class="logo-area">
+        <div class="brasao">⚖️</div>
+        <div class="title">
+          <h1>CONFAZ · Consulta CEST</h1>
+          <div class="sub">
+            Convênio ICMS 142/18 <span>Substituição Tributária</span><span class="badge">OFICIAL</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.9rem; margin-top:0.5rem; opacity:0.85;">
+        Base: Anexos II a XXVI — NCM/SH ↔ CEST · Atualizado conforme retificações e convênios posteriores
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="search-card">
+      <div class="search-row">
+        <div class="input-group">
+          <label>🔍 NCM/SH ou código</label>
+          <input type="text" id="ncmInput" placeholder="Ex: 2203.00.00 ou 2203" autofocus>
+        </div>
+        <div class="input-group">
+          <label>📋 Descrição (palavra-chave)</label>
+          <input type="text" id="descInput" placeholder="Ex: cerveja, refrigerante, cimento">
+        </div>
+        <button class="btn" id="searchBtn"><span>🔎</span> Consultar</button>
+        <button class="btn btn-outline" id="clearBtn">Limpar</button>
+      </div>
+      <div class="stats" id="statsText">
+        <span>📊 <strong id="totalRecords">0</strong> registros carregados</span>
+        <span id="resultCount"></span>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+        <h3 style="font-weight:600; color:#0b2b4f;">📄 Resultado da consulta</h3>
+        <small style="color:#5f6b7a;">Clique em qualquer linha para destacar</small>
+      </div>
+      <div class="table-wrapper">
+        <table id="resultTable">
+          <thead>
+             <tr><th>CEST</th><th>NCM/SH</th><th>Descrição</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Conselho Nacional de Política Fazendária – CONFAZ · Convênio ICMS 142/18, de 14 de dezembro de 2018 · Publicado DOU 19.12.18<br>
+    Desenvolvido para consulta pública · Dados oficiais dos Anexos II a XXVI
+  </footer>
+
+  <script>
+    (function() {
+      // =====================================================
+      // DADOS OFICIAIS EXTRAÍDOS DO CONVÊNIO ICMS 142/18
+      // (Anexos II a XXVI, conforme PDF fornecido)
+      // Inclui itens vigentes, inclusive alterações posteriores.
+      // =====================================================
+      const CEST_DATA = [
+        // ANEXO II - AUTOPEÇAS
+        { cest: "01.001.00", ncm: "3815.12.10 3815.12.90", descricao: "Catalisadores em colmeia cerâmica ou metálica para conversão catalítica de gases de escape de veículos e outros catalisadores" },
+        { cest: "01.002.00", ncm: "3917", descricao: "Tubos e seus acessórios (por exemplo, juntas, cotovelos, flanges, uniões), de plásticos" },
+        { cest: "01.003.00", ncm: "3918.10.00", descricao: "Protetores de caçamba" },
+        { cest: "01.004.00", ncm: "3923.30.00", descricao: "Reservatórios de óleo" },
+        { cest: "01.005.00", ncm: "3926.30.00", descricao: "Frisos, decalques, molduras e acabamentos" },
+        { cest: "01.006.00", ncm: "4010.3 5910.00.00", descricao: "Correias de transmissão de borracha vulcanizada, de matérias têxteis, mesmo impregnadas, revestidas ou recobertas, de plástico, ou estratificadas com plástico ou reforçadas com metal ou com outras matérias" },
+        { cest: "01.007.00", ncm: "4016.93.00 4823.90.9", descricao: "Juntas, gaxetas e outros elementos com função semelhante de vedação" },
+        { cest: "01.008.00", ncm: "4016.10.10", descricao: "Partes de veículos automóveis, tratores e máquinas autopropulsadas" },
+        { cest: "01.009.00", ncm: "4016.99.90 5705.00.00", descricao: "Tapetes, revestimentos, mesmo confeccionados, batentes, buchas e coxins" },
+        { cest: "01.010.00", ncm: "5903.90.00", descricao: "Tecidos impregnados, revestidos, recobertos ou estratificados, com plástico" },
+        { cest: "01.011.00", ncm: "5909.00.00", descricao: "Mangueiras e tubos semelhantes, de matérias têxteis, mesmo com reforço ou acessórios de outras matérias" },
+        { cest: "01.012.00", ncm: "6306.1", descricao: "Encerados e toldos" },
+        { cest: "01.013.00", ncm: "6506.10.00", descricao: "Capacetes e artefatos de uso semelhante, de proteção, para uso em motocicletas, incluídos ciclomotores" },
+        { cest: "01.014.00", ncm: "6813", descricao: "Guarnições de fricção (por exemplo, placas, rolos, tiras, segmentos, discos, anéis, pastilhas), não montadas, para freios, embreagens ou qualquer outro mecanismo de fricção, à base de amianto, de outras substâncias minerais ou de celulose, mesmo combinadas com têxteis ou outras matérias" },
+        { cest: "01.015.00", ncm: "7007.11.00 7007.21.00", descricao: "Vidros de dimensões e formatos que permitam aplicação automotiva" },
+        { cest: "01.016.00", ncm: "7009.10.00", descricao: "Espelhos retrovisores" },
+        { cest: "01.017.00", ncm: "7014.00.00", descricao: "Lentes de faróis, lanternas e outros utensílios" },
+        { cest: "01.018.00", ncm: "7311.00.00", descricao: "Cilindro de aço para GNV (gás natural veicular)" },
+        { cest: "01.019.00", ncm: "7311.00.00", descricao: "Recipientes para gases comprimidos ou liquefeitos, de ferro fundido, ferro ou aço, exceto o descrito no item 18.0" },
+        { cest: "01.020.00", ncm: "7320", descricao: "Molas e folhas de molas, de ferro ou aço" },
+        { cest: "01.021.00", ncm: "7325", descricao: "Obras moldadas, de ferro fundido, ferro ou aço, exceto as do código 7325.91.00" },
+        { cest: "01.022.00", ncm: "7806.00", descricao: "Peso de chumbo para balanceamento de roda" },
+        { cest: "01.023.00", ncm: "8007.00.90", descricao: "Peso para balanceamento de roda e outros utensílios de estanho" },
+        { cest: "01.024.00", ncm: "8301.20 8301.60", descricao: "Fechaduras e partes de fechaduras" },
+        { cest: "01.025.00", ncm: "8301.70", descricao: "Chaves apresentadas isoladamente" },
+        { cest: "01.026.00", ncm: "8302.10.00 8302.30.00", descricao: "Dobradiças, guarnições, ferragens e artigos semelhantes de metais comuns" },
+        { cest: "01.027.00", ncm: "8310.00", descricao: "Triângulo de segurança" },
+        { cest: "01.028.00", ncm: "8407.3", descricao: "Motores de pistão alternativo dos tipos utilizados para propulsão de veículos do Capítulo 87" },
+        { cest: "01.029.00", ncm: "8408.20", descricao: "Motores dos tipos utilizados para propulsão de veículos automotores" },
+        { cest: "01.030.00", ncm: "8409.9", descricao: "Partes reconhecíveis como exclusiva ou principalmente destinadas aos motores das posições 8407 ou 8408" },
+        { cest: "01.031.00", ncm: "8412.2", descricao: "Motores hidráulicos" },
+        { cest: "01.032.00", ncm: "8413.30", descricao: "Bombas para combustíveis, lubrificantes ou líquidos de arrefecimento, próprias para motores de ignição por centelha ou por compressão" },
+        { cest: "01.033.00", ncm: "8414.10.00", descricao: "Bombas de vácuo" },
+        { cest: "01.034.00", ncm: "8414.80.1 8414.80.2", descricao: "Compressores e turbocompressores de ar" },
+        { cest: "01.035.00", ncm: "8413.91.90 8414.90.10 8414.90.3 8414.90.39", descricao: "Partes das bombas, compressores e turbocompressores dos CEST 01.032.00, 01.033.00 e 01.034.00" },
+        { cest: "01.036.00", ncm: "8415.20", descricao: "Máquinas e aparelhos de ar condicionado" },
+        { cest: "01.037.00", ncm: "8421.23.00", descricao: "Aparelhos para filtrar óleos minerais nos motores de ignição por centelha ou por compressão" },
+        { cest: "01.038.00", ncm: "8421.29.90", descricao: "Filtros a vácuo" },
+        { cest: "01.039.00", ncm: "8421.9", descricao: "Partes dos aparelhos para filtrar ou depurar líquidos ou gases" },
+        { cest: "01.040.00", ncm: "8424.10.00", descricao: "Extintores, mesmo carregados" },
+        { cest: "01.041.00", ncm: "8421.31.00", descricao: "Filtros de entrada de ar para motores de ignição por centelha ou por compressão" },
+        { cest: "01.042.00", ncm: "8421.32.00", descricao: "Depuradores por conversão catalítica de gases de escape" },
+        { cest: "01.043.00", ncm: "8425.42.00", descricao: "Macacos" },
+        { cest: "01.044.00", ncm: "8431.10.10", descricao: "Partes para macacos do CEST 01.043.00" },
+        { cest: "01.045.00", ncm: "8431.49.2", descricao: "Partes reconhecíveis como exclusiva ou principalmente destinadas às máquinas agrícolas ou rodoviárias" },
+        { cest: "01.045.01", ncm: "8433.90.90", descricao: "Partes reconhecíveis como exclusiva ou principalmente destinadas às máquinas agrícolas ou rodoviárias" },
+        { cest: "01.046.00", ncm: "8481.10.00", descricao: "Válvulas redutoras de pressão" },
+        { cest: "01.047.00", ncm: "8481.2", descricao: "Válvulas para transmissão óleo-hidráulicas ou pneumáticas" },
+        { cest: "01.048.00", ncm: "8481.80.92", descricao: "Válvulas solenoides" },
+        { cest: "01.049.00", ncm: "8482", descricao: "Rolamentos" },
+        { cest: "01.050.00", ncm: "8483", descricao: "Árvores de transmissão (incluídas as árvores de cames e virabrequins) e manivelas; mancais e bronzes; engrenagens e rodas de fricção; eixos de esferas ou de roletes; redutores, multiplicadores, caixas de transmissão e variadores de velocidade, incluídos os conversores de torque; volantes e polias, incluídas as polias para cadernais; embreagens e dispositivos de acoplamento, incluídas as juntas de articulação" },
+        { cest: "01.051.00", ncm: "8484", descricao: "Juntas metaloplásticas; jogos ou sortidos de juntas de composições diferentes, apresentados em bolsas, envelopes ou embalagens semelhantes; juntas de vedação mecânicas (selos mecânicos)" },
+        { cest: "01.052.00", ncm: "8505.20", descricao: "Acoplamentos, embreagens, variadores de velocidade e freios, eletromagnéticos" },
+        { cest: "01.053.00", ncm: "8507.10", descricao: "Acumuladores elétricos de chumbo, do tipo utilizado para o arranque dos motores de pistão, exceto os classificados no CEST 01.053.01" },
+        { cest: "01.053.01", ncm: "8507.10.10", descricao: "Acumuladores elétricos de chumbo, do tipo utilizado para o arranque dos motores de pistão e de capacidade inferior ou igual a 20 Ah e tensão inferior ou igual a 12 V" },
+        { cest: "01.054.00", ncm: "8511", descricao: "Aparelhos e dispositivos elétricos de ignição ou de arranque para motores de ignição por centelha ou por compressão (por exemplo, magnetos, dínamos-magnetos, bobinas de ignição, velas de ignição ou de aquecimento, motores de arranque); geradores (dínamos e alternadores, por exemplo) e conjuntos-disjuntores utilizados com estes motores" },
+        { cest: "01.055.00", ncm: "8512.20 8512.90.00", descricao: "Aparelhos elétricos de iluminação ou de sinalização (exceto os da posição 8539), limpadores de para-brisas, degeladores e desembaçadores (desembaciadores) elétricos e suas partes" },
+        { cest: "01.056.00", ncm: "8517.14.10", descricao: "Telefones móveis do tipo dos utilizados em veículos automóveis" },
+        { cest: "01.057.00", ncm: "8518", descricao: "Alto-falantes, amplificadores elétricos de audiofrequência e partes" },
+        { cest: "01.058.00", ncm: "8518.50.00", descricao: "Aparelhos elétricos de amplificação de som para veículos automotores" },
+        { cest: "01.059.00", ncm: "8519.81", descricao: "Aparelhos de reprodução de som" },
+        { cest: "01.060.00", ncm: "8525.50.1 8525.60.10", descricao: "Aparelhos transmissores (emissores) de radiotelefonia ou radiotelegrafia (rádio receptor/transmissor)" },
+        { cest: "01.061.00", ncm: "8527.21.00", descricao: "Aparelhos receptores de radiodifusão que só funcionem com fonte externa de energia combinados com um aparelho de gravação ou de reprodução de som, do tipo utilizado em veículos automóveis" },
+        { cest: "01.062.00", ncm: "8527.29.00", descricao: "Outros aparelhos receptores de radiodifusão que só funcionem com fonte externa de energia, do tipo utilizado em veículos automóveis" },
+        { cest: "01.062.01", ncm: "8521.90.90", descricao: "Outros aparelhos videofônicos de gravação ou de reprodução, mesmo incorporando um receptor de sinais videofônicos, dos tipos utilizados exclusivamente em veículos automotores" },
+        { cest: "01.063.00", ncm: "8529.10.90", descricao: "Antenas" },
+        { cest: "01.064.00", ncm: "8534.00", descricao: "Circuitos impressos" },
+        { cest: "01.065.00", ncm: "8535.30 8536.50", descricao: "Interruptores e seccionadores e comutadores" },
+        { cest: "01.066.00", ncm: "8536.10.00", descricao: "Fusíveis e corta-circuitos de fusíveis" },
+        { cest: "01.067.00", ncm: "8536.20.00", descricao: "Disjuntores" },
+        { cest: "01.068.00", ncm: "8536.4", descricao: "Relés" },
+        { cest: "01.069.00", ncm: "8538", descricao: "Partes reconhecíveis como exclusivas ou principalmente destinados aos aparelhos dos CEST 01.065.00, 01.066.00, 01.067.00 e 01.068.00" },
+        { cest: "01.070.00", ncm: "8539.10", descricao: "Faróis e projetores, em unidades seladas" },
+        { cest: "01.071.00", ncm: "8539.2", descricao: "Lâmpadas e tubos de incandescência, exceto de raios ultravioleta ou infravermelhos" },
+        { cest: "01.072.00", ncm: "8544.20.00", descricao: "Cabos coaxiais e outros condutores elétricos coaxiais" },
+        { cest: "01.073.00", ncm: "8544.30.00", descricao: "Jogos de fios para velas de ignição e outros jogos de fios" },
+        { cest: "01.074.00", ncm: "8707", descricao: "Carroçarias para os veículos automóveis das posições 8701 a 8705, incluídas as cabinas" },
+        { cest: "01.075.00", ncm: "8708", descricao: "Partes e acessórios dos veículos automóveis das posições 8701 a 8705" },
+        { cest: "01.076.00", ncm: "8714.1", descricao: "Parte e acessórios de motocicletas (incluídos os ciclomotores)" },
+        { cest: "01.077.00", ncm: "8716.90.90", descricao: "Engates para reboques e semirreboques" },
+        { cest: "01.078.00", ncm: "9026.10", descricao: "Medidores de nível; Medidores de vazão" },
+        { cest: "01.079.00", ncm: "9026.20", descricao: "Aparelhos para medida ou controle da pressão" },
+        { cest: "01.080.00", ncm: "9029", descricao: "Contadores, indicadores de velocidade e tacômetros, suas partes e acessórios" },
+        { cest: "01.081.00", ncm: "9030.33.21", descricao: "Amperímetros" },
+        { cest: "01.082.00", ncm: "9031.80.40", descricao: "Aparelhos digitais, de uso em veículos automóveis, para medida e indicação de múltiplas grandezas tais como: velocidade média, consumos instantâneo e médio e autonomia (computador de bordo)" },
+        { cest: "01.083.00", ncm: "9032.89.2", descricao: "Controladores eletrônicos" },
+        { cest: "01.084.00", ncm: "9104.00.00", descricao: "Relógios para painéis de instrumentos e relógios semelhantes" },
+        { cest: "01.085.00", ncm: "9401.29.00", descricao: "Assentos e partes de assentos" },
+        { cest: "01.086.00", ncm: "9613.80.00", descricao: "Acendedores" },
+        { cest: "01.087.00", ncm: "4009", descricao: "Tubos de borracha vulcanizada não endurecida, mesmo providos de seus acessórios" },
+        { cest: "01.088.00", ncm: "4504.90.00 6812.99.10", descricao: "Juntas de vedação de cortiça natural e de amianto" },
+        { cest: "01.089.00", ncm: "4823.40.00", descricao: "Papel-diagrama para tacógrafo, em disco" },
+        { cest: "01.090.00", ncm: "3919.10 3919.90 8708.29.99", descricao: "Fitas, tiras, adesivos, autocolantes, de plástico, refletores, mesmo em rolos; placas metálicas com película de plástico refletora, próprias para colocação em carrocerias, para-choques de veículos de carga, motocicletas, ciclomotores, capacetes, bonés de agentes de trânsito e de condutores de veículos, atuando como dispositivos refletivos de segurança rodoviários" },
+        { cest: "01.091.00", ncm: "8412.31.10", descricao: "Cilindros pneumáticos" },
+        { cest: "01.092.00", ncm: "8413.19.00 8413.81.00", descricao: "Bomba elétrica de lavador de para-brisa" },
+        { cest: "01.093.00", ncm: "8413.60.19 8413.70.10", descricao: "Bomba de assistência de direção hidráulica" },
+        { cest: "01.094.00", ncm: "8414.59.10 8414.59.90", descricao: "Motoventiladores" },
+        { cest: "01.095.00", ncm: "8421.39.90", descricao: "Filtros de pólen do ar-condicionado" },
+        { cest: "01.096.00", ncm: "8501.10.19", descricao: "Máquina de vidro elétrico de porta" },
+        { cest: "01.097.00", ncm: "8501.31.10", descricao: "Motor de limpador de para-brisa" },
+        { cest: "01.098.00", ncm: "8504.50.00", descricao: "Bobinas de reatância e de autoindução" },
+        { cest: "01.099.00", ncm: "8507.20 8507.30", descricao: "Baterias de chumbo e de níquel-cádmio" },
+        { cest: "01.100.00", ncm: "8512.30.00", descricao: "Aparelhos de sinalização acústica (buzina)" },
+        { cest: "01.101.00", ncm: "9032.89.8 9032.89.9", descricao: "Instrumentos para regulação de grandezas não elétricas" },
+        { cest: "01.102.00", ncm: "9027.10.00", descricao: "Analisadores de gases ou de fumaça (sonda lambda)" },
+        { cest: "01.103.00", ncm: "4008.11.00", descricao: "Perfilados de borracha vulcanizada não endurecida" },
+        { cest: "01.104.00", ncm: "5601.22.19", descricao: "Artefatos de pasta de fibra de uso automotivo" },
+        { cest: "01.105.00", ncm: "5703.29.00", descricao: "Tapetes/carpetes - náilon" },
+        { cest: "01.106.00", ncm: "5703.39.00", descricao: "Tapetes de matérias têxteis sintéticas" },
+        { cest: "01.107.00", ncm: "5911.90.00", descricao: "Forração interior capacete" },
+        { cest: "01.108.00", ncm: "6903.90.99", descricao: "Outros para-brisas" },
+        { cest: "01.109.00", ncm: "7007.29.00", descricao: "Moldura com espelho" },
+        { cest: "01.111.00", ncm: "7315.11.00", descricao: "Corrente transmissão" },
+        { cest: "01.112.00", ncm: "7315.12.10", descricao: "Outras correntes de transmissão" },
+        { cest: "01.113.00", ncm: "8418.99.00", descricao: "Condensador tubular metálico" },
+        { cest: "01.114.00", ncm: "8419.50", descricao: "Trocadores de calor" },
+        { cest: "01.115.00", ncm: "8424.90.90", descricao: "Partes de aparelhos mecânicos de pulverizar ou dispersar" },
+        { cest: "01.116.00", ncm: "8425.49.10", descricao: "Macacos manuais para veículos" },
+        { cest: "01.117.00", ncm: "8431.41.00", descricao: "Caçambas, pás, ganchos e tenazes para máquinas rodoviárias" },
+        { cest: "01.118.00", ncm: "8501.61.00", descricao: "Geradores de corrente alternada de potência não superior a 75 kva" },
+        { cest: "01.119.00", ncm: "8531.10.90", descricao: "Aparelhos elétricos para alarme de uso automotivo" },
+        { cest: "01.120.00", ncm: "9014.10.00", descricao: "Bússolas" },
+        { cest: "01.121.00", ncm: "9025.19.90", descricao: "Indicadores de temperatura" },
+        { cest: "01.122.00", ncm: "9025.90.10", descricao: "Partes de indicadores de temperatura" },
+        { cest: "01.123.00", ncm: "9026.90", descricao: "Partes de aparelhos de medida ou controle" },
+        { cest: "01.124.00", ncm: "9032.10.10", descricao: "Termostatos" },
+        { cest: "01.125.00", ncm: "9032.10.90", descricao: "Instrumentos e aparelhos para regulação" },
+        { cest: "01.126.00", ncm: "9032.20.00", descricao: "Pressostatos" },
+        { cest: "01.127.00", ncm: "8716.90", descricao: "Peças para reboques e semirreboques, exceto os itens classificados no CEST 01.077.00" },
+        { cest: "01.128.00", ncm: "7322.90.10", descricao: "Geradores de ar quente a combustível líquido, com capacidade superior ou igual a 1.500 kcal/h, mas inferior ou igual a 10.400 kcal/h, do tipo dos utilizados em veículos automóveis" },
+        { cest: "01.999.00", ncm: "Outros", descricao: "Outras peças, partes e acessórios para veículos automotores não relacionados nos demais itens deste anexo" },
+
+        // ANEXO III - BEBIDAS ALCOÓLICAS EXCETO CERVEJA E CHOPE
+        { cest: "02.001.00", ncm: "2205 2208.90.00", descricao: "Aperitivos, amargos, bitter e similares" },
+        { cest: "02.002.00", ncm: "2208.90.00", descricao: "Batida e similares" },
+        { cest: "02.003.00", ncm: "2208.90.00", descricao: "Bebida ice" },
+        { cest: "02.004.00", ncm: "2207.20 2208.40.00", descricao: "Cachaça e aguardentes" },
+        { cest: "02.005.00", ncm: "2205 2206.00.90 2208.90.00", descricao: "Catuaba e similares" },
+        { cest: "02.006.00", ncm: "2208.20.00", descricao: "Conhaque, brandy e similares" },
+        { cest: "02.007.00", ncm: "2206.00.90 2208.90.00", descricao: "Cooler" },
+        { cest: "02.008.00", ncm: "2208.50.00", descricao: "Gim (gin) e genebra" },
+        { cest: "02.009.00", ncm: "2205 2206.00.90 2208.90.00", descricao: "Jurubeba e similares" },
+        { cest: "02.010.00", ncm: "2208.70.00", descricao: "Licores e similares" },
+        { cest: "02.011.00", ncm: "2208.20.00", descricao: "Pisco" },
+        { cest: "02.012.00", ncm: "2208.40.00", descricao: "Rum" },
+        { cest: "02.013.00", ncm: "2206.00.90", descricao: "Saqué" },
+        { cest: "02.014.00", ncm: "2208.90.00", descricao: "Steinhaeger" },
+        { cest: "02.015.00", ncm: "2208.90.00", descricao: "Tequila" },
+        { cest: "02.016.00", ncm: "2208.30", descricao: "Uísque" },
+        { cest: "02.017.00", ncm: "2205", descricao: "Vermute e similares" },
+        { cest: "02.018.00", ncm: "2208.60.00", descricao: "Vodka" },
+        { cest: "02.019.00", ncm: "2208.90.00", descricao: "Derivados de vodka" },
+        { cest: "02.020.00", ncm: "2208.90.00", descricao: "Arak" },
+        { cest: "02.021.00", ncm: "2208.20.00", descricao: "Aguardente vínica / grappa" },
+        { cest: "02.022.00", ncm: "2206.00.10", descricao: "Sidra e similares" },
+        { cest: "02.023.00", ncm: "2205 2206.00.90 2208.90.00", descricao: "Sangrias e coquetéis" },
+        { cest: "02.024.00", ncm: "2204", descricao: "Vinhos de uvas frescas, incluindo os vinhos enriquecidos com álcool; mostos de uvas." },
+        { cest: "02.999.00", ncm: "2205 2206 2207 2208", descricao: "Outras bebidas alcoólicas não especificadas nos itens anteriores" },
+
+        // ANEXO IV - CERVEJAS, CHOPES, REFRIGERANTES, ÁGUAS E OUTRAS BEBIDAS
+        { cest: "03.003.00", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, em embalagem de vidro descartável" },
+        { cest: "03.003.01", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, adicionadas de sais, em embalagem de vidro descartável" },
+        { cest: "03.005.00", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, em copo plástico descartável" },
+        { cest: "03.005.01", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, adicionadas de sais, em copo plástico descartável" },
+        { cest: "03.005.02", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, em jarra descartável" },
+        { cest: "03.005.03", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, adicionadas de sais, em jarra descartável" },
+        { cest: "03.005.04", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, em demais embalagens descartáveis" },
+        { cest: "03.005.05", ncm: "2201.10.00 2201.90.00", descricao: "Água mineral, gasosa ou não, ou potável, naturais, adicionadas de sais, em demais embalagens descartáveis" },
+        { cest: "03.006.00", ncm: "2201", descricao: "Outras águas minerais, gasosa ou não, ou potável, naturais; exceto as classificadas no CEST 03.003.00, 03.003.01, 03.005.00, 03.005.01 a 03.005.05, 03.024.00 e 03.025.00" },
+        { cest: "03.007.00", ncm: "2202.10.00", descricao: "Água aromatizada artificialmente, exceto os refrescos e refrigerantes" },
+        { cest: "03.008.00", ncm: "2202.99.00", descricao: "Outras águas minerais, gasosa ou não, ou potável, naturais, inclusive gaseificadas ou aromatizadas artificialmente, exceto os refrescos e refrigerantes" },
+        { cest: "03.010.00", ncm: "2202.10.00 2202.99.00", descricao: "Refrigerante em vidro descartável" },
+        { cest: "03.010.01", ncm: "2202.10.00 2202.99.00", descricao: "Refrigerante em embalagem pet" },
+        { cest: "03.010.02", ncm: "2202.10.00 2202.99.00", descricao: "Refrigerante em lata" },
+        { cest: "03.011.00", ncm: "2202.10.00 2202.99.00", descricao: "Demais refrigerantes, exceto os classificados no CEST 03.010.00, 03.010.01, 03.010.02 e 03.011.01" },
+        { cest: "03.011.01", ncm: "2202", descricao: "Espumantes sem álcool" },
+        { cest: "03.012.00", ncm: "2106.90.10", descricao: "Xarope ou extrato concentrado destinados ao preparo de refrigerante em máquina pré-mix ou post-mix, exceto o classificado no CEST 03.012.01" },
+        { cest: "03.012.01", ncm: "2106.90.10", descricao: "Cápsula de refrigerante" },
+        { cest: "03.013.00", ncm: "2106.90 2202.99.00", descricao: "Bebidas energéticas em lata" },
+        { cest: "03.013.01", ncm: "2106.90 2202.99.00", descricao: "Bebidas energéticas em embalagem PET" },
+        { cest: "03.013.02", ncm: "2106.90 2202.99.00", descricao: "Bebidas energéticas em vidro" },
+        { cest: "03.015.00", ncm: "2106.90 2202.99.00", descricao: "Bebidas hidroeletrolíticas" },
+        { cest: "03.021.00", ncm: "2203.00.00", descricao: "Cerveja em garrafa de vidro retornável" },
+        { cest: "03.021.01", ncm: "2203.00.00", descricao: "Cerveja em garrafa de vidro descartável" },
+        { cest: "03.021.02", ncm: "2203.00.00", descricao: "Cerveja em garrafa de alumínio" },
+        { cest: "03.021.03", ncm: "2203.00.00", descricao: "Cerveja em lata" },
+        { cest: "03.021.04", ncm: "2203.00.00", descricao: "Cerveja em barril" },
+        { cest: "03.021.05", ncm: "2203.00.00", descricao: "Cerveja em embalagem PET" },
+        { cest: "03.021.06", ncm: "2203.00.00", descricao: "Cerveja em outras embalagens" },
+        { cest: "03.022.00", ncm: "2202.91.00", descricao: "Cerveja sem álcool em garrafa de vidro retornável" },
+        { cest: "03.022.01", ncm: "2202.91.00", descricao: "Cerveja sem álcool em garrafa de vidro descartável" },
+        { cest: "03.022.02", ncm: "2202.91.00", descricao: "Cerveja sem álcool em garrafa de alumínio" },
+        { cest: "03.022.03", ncm: "2202.91.00", descricao: "Cerveja sem álcool em lata" },
+        { cest: "03.022.04", ncm: "2202.91.00", descricao: "Cerveja sem álcool em barril" },
+        { cest: "03.022.05", ncm: "2202.91.00", descricao: "Cerveja sem álcool em embalagem PET" },
+        { cest: "03.022.06", ncm: "2202.91.00", descricao: "Cerveja sem álcool em outras embalagens" },
+        { cest: "03.023.00", ncm: "2203.00.00", descricao: "Chope" },
+        { cest: "03.024.00", ncm: "2201.10.00", descricao: "Água mineral em embalagens retornáveis com capacidade igual ou superior a 10 (dez) e inferior a 20 (vinte) litros" },
+        { cest: "03.025.00", ncm: "2201.10.00", descricao: "Água mineral em embalagens retornáveis com capacidade igual ou superior a 20 (vinte) litros" },
+
+        // ANEXO V - CIGARROS
+        { cest: "04.001.00", ncm: "2402", descricao: "Charutos, cigarrilhas e cigarros, de tabaco ou dos seus sucedâneos" },
+        { cest: "04.002.00", ncm: "2403.1", descricao: "Tabaco para fumar, mesmo contendo sucedâneos de tabaco em qualquer proporção" },
+
+        // ANEXO VI - CIMENTOS
+        { cest: "05.001.00", ncm: "2523", descricao: "Cimento" },
+
+        // ANEXO VII - COMBUSTÍVEIS E LUBRIFICANTES
+        { cest: "06.001.00", ncm: "2207.10.10", descricao: "Álcool etílico não desnaturado, com um teor alcoólico em volume igual ou superior a 80% vol - Com um teor de água igual ou inferior a 1 % vol (álcool etílico anidro combustível)" },
+        { cest: "06.001.01", ncm: "2207.10.90", descricao: "Álcool etílico não desnaturado, com um teor alcoólico em volume igual ou superior a 80% vol - Outros (álcool etílico hidratado combustível)" },
+        { cest: "06.002.00", ncm: "2710.12.59", descricao: "Gasolina automotiva A, exceto Premium" },
+        { cest: "06.002.01", ncm: "2710.12.59", descricao: "Gasolina automotiva C, exceto Premium" },
+        { cest: "06.002.02", ncm: "2710.12.59", descricao: "Gasolina automotiva A Premium" },
+        { cest: "06.002.03", ncm: "2710.12.59", descricao: "Gasolina automotiva C Premium" },
+        { cest: "06.003.00", ncm: "2710.12.51", descricao: "Gasolina de aviação" },
+        { cest: "06.004.00", ncm: "2710.19.19", descricao: "Querosenes, exceto de aviação" },
+        { cest: "06.005.00", ncm: "2710.19.11", descricao: "Querosene de aviação" },
+        { cest: "06.006.00", ncm: "2710.19.2", descricao: "Óleo diesel A, exceto S10 e Marítimo" },
+        { cest: "06.006.01", ncm: "2710.19.2", descricao: "Óleo diesel B, exceto S10 (mistura obrigatória)" },
+        { cest: "06.006.02", ncm: "2710.19.2", descricao: "Óleo diesel B, exceto S10 (misturas autorizativas)" },
+        { cest: "06.006.03", ncm: "2710.19.2", descricao: "Óleo diesel B, exceto S10 (misturas experimentais)" },
+        { cest: "06.006.04", ncm: "2710.19.2", descricao: "Óleo diesel A S10" },
+        { cest: "06.006.05", ncm: "2710.19.2", descricao: "Óleo diesel B S10 (mistura obrigatória)" },
+        { cest: "06.006.06", ncm: "2710.19.2", descricao: "Óleo diesel B S10 (misturas autorizativas)" },
+        { cest: "06.006.07", ncm: "2710.19.2", descricao: "Óleo diesel B S10 (misturas experimentais)" },
+        { cest: "06.006.08", ncm: "2710.19.2", descricao: "Óleo Diesel Marítimo" },
+        { cest: "06.006.09", ncm: "2710.19.2", descricao: "Outros óleos combustíveis, exceto os classificados no CEST 06.006.10 e 06.006.11" },
+        { cest: "06.006.10", ncm: "2710.19.2", descricao: "Óleo combustível derivado de xisto" },
+        { cest: "06.006.11", ncm: "2710.19.22", descricao: "Óleo combustível pesado" },
+        { cest: "06.007.00", ncm: "2710.19.3", descricao: "Óleos lubrificantes" },
+        { cest: "06.008.00", ncm: "2710.19.9", descricao: "Outros óleos de petróleo ou de minerais betuminosos (exceto óleos brutos) e preparações não especificadas nem compreendidas noutras posições, que contenham, como constituintes básicos, 70% ou mais, em peso, de óleos de petróleo ou de minerais betuminosos, exceto os que contenham biodiesel, exceto os resíduos de óleos e exceto as graxas lubrificantes" },
+        { cest: "06.008.01", ncm: "2710.19.9", descricao: "Graxa lubrificante" },
+        { cest: "06.009.00", ncm: "2710.9", descricao: "Resíduos de óleos" },
+        { cest: "06.010.00", ncm: "2711", descricao: "Gás de petróleo e outros hidrocarbonetos gasosos, exceto GLP, GLGN, Gás Natural e Gás de xisto." },
+        { cest: "06.011.00", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo em botijão de 13 Kg (GLP)" },
+        { cest: "06.011.01", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo (GLP), exceto em botijão de 13 Kg" },
+        { cest: "06.011.02", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo em botijão de 13 Kg (GLGNn)" },
+        { cest: "06.011.03", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo (GLGNn), exceto em botijão de 13 Kg" },
+        { cest: "06.011.04", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo em botijão de 13 Kg (GLGNi)" },
+        { cest: "06.011.05", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo (GLGNi), exceto em botijão de 13 Kg" },
+        { cest: "06.011.06", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo em botijão de 13 Kg (Misturas)" },
+        { cest: "06.011.07", ncm: "2711.19.10", descricao: "Gás liquefeito de petróleo (Misturas), exceto em botijão de 13 Kg" },
+        { cest: "06.012.00", ncm: "2711.11.00", descricao: "Gás Natural Liquefeito" },
+        { cest: "06.013.00", ncm: "2711.21.00", descricao: "Gás Natural Gasoso" },
+        { cest: "06.014.00", ncm: "2711.29.90", descricao: "Gás de xisto" },
+        { cest: "06.015.00", ncm: "2713", descricao: "Coque de petróleo e outros resíduos de óleo de petróleo ou de minerais betuminosos" },
+        { cest: "06.016.00", ncm: "3826.00.00", descricao: "Biodiesel e suas misturas, que não contenham ou que contenham menos de 70%, em peso, de óleos de petróleo ou de óleos minerais betuminosos" },
+        { cest: "06.017.00", ncm: "3403", descricao: "Preparações lubrificantes, exceto as contendo, como constituintes de base, 70% ou mais, em peso, de óleos de petróleo ou de minerais betuminosos" },
+        { cest: "06.018.00", ncm: "2710.20.00", descricao: "Óleos de petróleo ou de minerais betuminosos (exceto óleos brutos) e preparações não especificadas nem compreendidas noutras posições, que contenham, como constituintes básicos, 70% ou mais, em peso, de óleos de petróleo ou de minerais betuminosos, que contenham biodiesel, exceto os resíduos de óleos" },
+
+        // ANEXO VIII - ENERGIA ELÉTRICA
+        { cest: "07.001.00", ncm: "2716.00.00", descricao: "Energia elétrica" },
+
+        // ANEXO IX - FERRAMENTAS (amostra)
+        { cest: "08.001.00", ncm: "4016.99.90", descricao: "Ferramentas de borracha vulcanizada não endurecida" },
+        { cest: "08.002.00", ncm: "4417.00.10 4417.00.90", descricao: "Ferramentas, armações e cabos de ferramentas, de madeira" },
+        { cest: "08.003.00", ncm: "6804", descricao: "Mós e artefatos semelhantes, sem armação, para moer, desfibrar, triturar, amolar, polir, retificar ou cortar; pedras para amolar ou para polir, manualmente, e suas partes, de pedras naturais, de abrasivos naturais ou artificiais aglomerados ou de cerâmica, mesmo com partes de outras matérias" },
+        { cest: "08.004.00", ncm: "8201", descricao: "Pás, alviões, picaretas, enxadas, sachos, forcados e forquilhas, acinchos e raspadeiras; machados, podões e ferramentas semelhantes com gume; tesouras de podar de todos os tipos; foices e focinhas, facas para feno ou para palha, tesouras para sebes, cunhas e outras ferramentas manuais para agricultura, horticultura ou silvicultura" },
+        { cest: "08.005.00", ncm: "8202.20.00", descricao: "Folhas de serras de fita" },
+        { cest: "08.006.00", ncm: "8202.91.00", descricao: "Lâminas de serras máquinas" },
+        { cest: "08.007.00", ncm: "8202", descricao: "Serras manuais e outras folhas de serras (incluídas as fresas-serras e as folhas não dentadas para serrar), exceto as classificadas nos CEST 08.005.00 e 08.006.00" },
+        { cest: "08.008.00", ncm: "8203", descricao: "Limas, grosas, alicates (mesmo cortantes), tenazes, pinças, cisalhas para metais, corta-tubos, corta-pinos, saca-bocados e ferramentas semelhantes, manuais, exceto as pinças para sobrancelhas classificadas na posição 8203.20.90" },
+        { cest: "08.009.00", ncm: "8204", descricao: "Chaves de porcas, manuais (incluídas as chaves dinamométricas); chaves de caixa intercambiáveis, mesmo com cabos" },
+        { cest: "08.010.00", ncm: "8205", descricao: "Ferramentas manuais (incluídos os diamantes de vidraceiro) não especificadas nem compreendidas em outras posições, lamparinas ou lâmpadas de soldar (maçaricos) e semelhantes; tornos de apertar, sargentos e semelhantes, exceto os acessórios ou partes de máquinas-ferramentas; bigornas; forjas-portáteis; mós com armação, manuais ou de pedal" },
+        { cest: "08.011.00", ncm: "8206.00.00", descricao: "Ferramentas de pelo menos duas das posições 8202 a 8205, acondicionadas em sortidos para venda a retalho" },
+        { cest: "08.012.00", ncm: "8207.40 8207.70", descricao: "Ferramentas de roscar interior ou exteriormente; de mandrilar ou de brochar; e de fresar" },
+        { cest: "08.013.00", ncm: "8207", descricao: "Outras ferramentas intercambiáveis para ferramentas manuais, mesmo mecânicas, ou para máquinas-ferramentas (por exemplo, de embutir, estampar, puncionar, furar, tornear, aparafusar), incluídas as fieiras de estiragem ou de extrusão, para metais, e as ferramentas de perfuração ou de sondagem, exceto forma ou gabarito de produtos em epoxy e as classificadas no CEST 08.012.00" },
+        { cest: "08.014.00", ncm: "8208", descricao: "Facas e lâminas cortantes, para máquinas ou para aparelhos mecânicos" },
+        { cest: "08.015.00", ncm: "8209.00.11", descricao: "Plaquetas ou pastilhas intercambiáveis" },
+        { cest: "08.016.00", ncm: "8209.00", descricao: "Outras plaquetas, varetas, pontas e objetos semelhantes para ferramentas, não montados, de ceramais (cermets), exceto as classificadas no CEST 08.015.00" },
+        { cest: "08.017.00", ncm: "8211", descricao: "Facas de lâmina cortante ou serrilhada, incluídas as podadeiras de lâmina móvel, e suas lâminas, exceto as de uso doméstico" },
+        { cest: "08.018.00", ncm: "8213", descricao: "Tesouras e suas lâminas" },
+        { cest: "08.019.00", ncm: "8467", descricao: "Ferramentas pneumáticas, hidráulicas ou com motor (elétrico ou não elétrico) incorporado, de uso manual, exceto o descrito no CEST 08.019.01" },
+        { cest: "08.019.01", ncm: "8467.81.00", descricao: "Moto-serras portáteis de corrente, com motor incorporado, não elétrico, de uso agrícola" },
+
+        // ANEXO X - LÂMPADAS
+        { cest: "09.001.00", ncm: "8539", descricao: "Lâmpadas elétricas" },
+        { cest: "09.002.00", ncm: "8540", descricao: "Lâmpadas eletrônicas" },
+        { cest: "09.003.00", ncm: "8504.10.00", descricao: "Reatores para lâmpadas ou tubos de descargas" },
+        { cest: "09.004.00", ncm: "8536.50", descricao: "Starter" },
+        { cest: "09.005.00", ncm: "8539.52.00", descricao: "Lâmpadas de LED (diodos emissores de luz)" },
+
+        // ANEXO XI - MATERIAIS DE CONSTRUÇÃO (parcial)
+        { cest: "10.001.00", ncm: "2522", descricao: "Cal" },
+        { cest: "10.002.00", ncm: "3816.00.1 3824.50.00", descricao: "Argamassas" },
+        { cest: "10.003.00", ncm: "3214.90.00", descricao: "Outras argamassas" },
+        { cest: "10.004.00", ncm: "3910.00", descricao: "Silicones em formas primárias, para uso na construção" },
+        { cest: "10.005.00", ncm: "3916", descricao: "Revestimentos de PVC e outros plásticos; forro, sancas e afins de PVC, para uso na construção" },
+        { cest: "10.006.00", ncm: "3917", descricao: "Tubos, e seus acessórios (por exemplo, juntas, cotovelos, flanges, uniões), de plásticos, para uso na construção" },
+        { cest: "10.007.00", ncm: "3918", descricao: "Revestimento de pavimento de PVC e outros plásticos" },
+        { cest: "10.008.00", ncm: "3919", descricao: "Chapas, folhas, tiras, fitas, películas e outras formas planas, autoadesivas, de plásticos, mesmo em rolos, para uso na construção" },
+        { cest: "10.009.00", ncm: "3919 3920 3921", descricao: "Veda rosca, lona plástica para uso na construção, fitas isolantes e afins" },
+        { cest: "10.010.00", ncm: "3921", descricao: "Telha de plástico, mesmo reforçada com fibra de vidro" },
+        { cest: "10.011.00", ncm: "3921", descricao: "Cumeeira de plástico, mesmo reforçada com fibra de vidro" },
+        { cest: "10.012.00", ncm: "3921", descricao: "Chapas, laminados plásticos em bobina, para uso na construção, exceto os descritos no CEST 10.010.00 e 10.011.00" },
+        { cest: "10.013.00", ncm: "3922", descricao: "Banheiras, boxes para chuveiros, pias, lavatórios, bidês, sanitários e seus assentos e tampas, caixas de descarga e artigos semelhantes para usos sanitários ou higiênicos, de plásticos" },
+        { cest: "10.014.00", ncm: "3924", descricao: "Artefatos de higiene/toucador de plástico, para uso na construção" },
+        { cest: "10.015.00", ncm: "3925.10.00", descricao: "Caixa d'água, inclusive sua tampa, de plástico, mesmo reforçadas com fibra de vidro" },
+        { cest: "10.016.00", ncm: "3925.90", descricao: "Outras telhas, cumeeira e caixa d'água, inclusive sua tampa, de plástico, mesmo reforçadas com fibra de vidro" },
+        { cest: "10.017.00", ncm: "3925.10.00 3925.90", descricao: "Artefatos para apetrechamento de construções, de plásticos, não especificados nem compreendidos em outras posições, incluindo persianas, sancas, molduras, apliques" },
+        { cest: "10.018.00", ncm: "3925.20.00", descricao: "Portas, janelas e seus caixilhos, alizares e soleiras" },
+        { cest: "10.019.00", ncm: "3925.30.00", descricao: "Postigos, estores (incluídas as venezianas) e artefatos semelhantes e suas partes" },
+        { cest: "10.020.00", ncm: "3926.90", descricao: "Outras obras de plástico, para uso na construção" },
+        { cest: "10.021.00", ncm: "4814", descricao: "Papel de parede e revestimentos de parede semelhantes; papel para vitrais" },
+        { cest: "10.022.00", ncm: "6810.19.00", descricao: "Telhas de concreto" },
+        { cest: "10.024.00", ncm: "6811", descricao: "Caixas d'água, tanques e reservatórios e suas tampas, telhas, calhas, cumeeiras e afins, de fibrocimento, cimento-celulose ou semelhantes, contendo ou não amianto." },
+        { cest: "10.025.00", ncm: "6901.00.00", descricao: "Tijolos, placas (lajes), ladrilhos e outras peças cerâmicas de farinhas siliciosas fósseis (kieselghur, tripolita, diatomita, por exemplo) ou de terras siliciosas semelhantes" },
+        { cest: "10.026.00", ncm: "6902", descricao: "Tijolos, placas (lajes), ladrilhos e peças cerâmicas semelhantes, para uso na construção, refratários, que não sejam de farinhas siliciosas fósseis nem de terras siliciosas semelhantes" },
+        { cest: "10.027.00", ncm: "6904", descricao: "Tijolos para construção, tijoleiras, tapa-vigas e produtos semelhantes, de cerâmica" },
+        { cest: "10.028.00", ncm: "6905", descricao: "Telhas, elementos de chaminés, condutores de fumaça, ornamentos arquitetônicos, de cerâmica, e outros produtos cerâmicos para uso na construção" },
+        { cest: "10.029.00", ncm: "6906.00.00", descricao: "Tubos, calhas ou algerozes e acessórios para canalizações, de cerâmica" },
+        { cest: "10.030.00", ncm: "6907", descricao: "Ladrilhos e placas de cerâmica, exclusivamente para pavimentação ou revestimento" },
+        { cest: "10.030.01", ncm: "6907", descricao: "Cubos, pastilhas e artigos semelhantes de cerâmica, mesmo com suporte, exceto os descritos CEST 10.030.00" },
+        { cest: "10.031.00", ncm: "6910", descricao: "Pias, lavatórios, colunas para lavatórios, banheiras, bidês, sanitários, caixas de descarga, mictórios e aparelhos fixos semelhantes para usos sanitários, de cerâmica" },
+        { cest: "10.032.00", ncm: "6912.00.00", descricao: "Artefatos de higiene/toucador de cerâmica" },
+        { cest: "10.033.00", ncm: "7003", descricao: "Vidro vazado ou laminado, em chapas, folhas ou perfis, mesmo com camada absorvente, refletora ou não, mas sem qualquer outro trabalho" },
+        { cest: "10.034.00", ncm: "7004", descricao: "Vidro estirado ou soprado, em folhas, mesmo com camada absorvente, refletora ou não, mas sem qualquer outro trabalho" },
+        { cest: "10.035.00", ncm: "7005", descricao: "Vidro flotado e vidro desbastado ou polido em uma ou em ambas as faces, em chapas ou em folhas, mesmo com camada absorvente, refletora ou não, mas sem qualquer outro trabalho" },
+        { cest: "10.036.00", ncm: "7007.19.00", descricao: "Vidros temperados" },
+        { cest: "10.037.00", ncm: "7007.29.00", descricao: "Vidros laminados" },
+        { cest: "10.038.00", ncm: "7008", descricao: "Vidros isolantes de paredes múltiplas" },
+        { cest: "10.039.00", ncm: "7016", descricao: "Blocos, placas, tijolos, ladrilhos, telhas e outros artefatos, de vidro prensado ou moldado, mesmo armado, para uso na construção; cubos, pastilhas e outros artigos semelhantes" },
+        { cest: "10.040.00", ncm: "7214.20.00", descricao: "Barras próprias para construções, exceto vergalhões" },
+        { cest: "10.041.00", ncm: "7308.90.10", descricao: "Outras barras próprias para construções, exceto vergalhões" },
+        { cest: "10.041.01", ncm: "7308.90.10", descricao: "Outros vergalhões" },
+        { cest: "10.042.00", ncm: "7214.20.00", descricao: "Vergalhões" },
+        { cest: "10.043.00", ncm: "7213", descricao: "Outros vergalhões" },
+        { cest: "10.044.00", ncm: "7217.10.90 7312", descricao: "Fios de ferro ou aço não ligados, não revestidos, mesmo polidos; cordas, cabos, tranças (entrançados), lingas e artefatos semelhantes, de ferro ou aço, não isolados para usos elétricos" },
+        { cest: "10.045.00", ncm: "7217.20.10", descricao: "Outros fios de ferro ou aço, não ligados, galvanizados com teor de carbono superior ou igual a 0,6%, em peso" },
+        { cest: "10.045.01", ncm: "7217.20.90", descricao: "Outros fios de ferro ou aço, não ligados, galvanizados" },
+        { cest: "10.046.00", ncm: "7307", descricao: "Acessórios para tubos (inclusive uniões, cotovelos, luvas ou mangas), de ferro fundido, ferro ou aço" },
+        { cest: "10.047.00", ncm: "7308.30.00", descricao: "Portas e janelas, e seus caixilhos, alizares e soleiras de ferro fundido, ferro ou aço" },
+        { cest: "10.048.00", ncm: "7308.40.00 7308.90", descricao: "Material para andaimes, para armações (cofragens) e para escoramentos, (inclusive armações prontas, para estruturas de concreto armado ou argamassa armada), eletrocalhas e perfilados de ferro fundido, ferro ou aço, próprios para construção, exceto treliças de aço" },
+        { cest: "10.049.00", ncm: "7308.40.00", descricao: "Treliças de aço" },
+        { cest: "10.050.00", ncm: "7308.90.90", descricao: "Telhas metálicas" },
+        { cest: "10.051.00", ncm: "7310", descricao: "Caixas diversas (tais como caixa de correio, de entrada de água, de energia, de instalação) de ferro fundido, ferro ou aço; próprias para a construção" },
+        { cest: "10.052.00", ncm: "7313.00.00", descricao: "Arame farpado, de ferro ou aço, arames ou tiras, retorcidos, mesmo farpados, de ferro ou aço, dos tipos utilizados em cercas" },
+        { cest: "10.053.00", ncm: "7314", descricao: "Telas metálicas, grades e redes, de fios de ferro ou aço" },
+        { cest: "10.054.00", ncm: "7315.11.00", descricao: "Correntes de rolos, de ferro fundido, ferro ou aço" },
+        { cest: "10.055.00", ncm: "7315.12.90", descricao: "Outras correntes de elos articulados, de ferro fundido, ferro ou aço" },
+        { cest: "10.056.00", ncm: "7315.82.00", descricao: "Correntes de elos soldados, de ferro fundido, de ferro ou aço" },
+        { cest: "10.057.00", ncm: "7317.00", descricao: "Tachas, pregos, percevejos, escápulas, grampos ondulados ou biselados e artefatos semelhantes, de ferro fundido, ferro ou aço, mesmo com a cabeça de outra matéria, exceto cobre" },
+        { cest: "10.058.00", ncm: "7318", descricao: "Parafusos, pinos ou pernos, roscados, porcas, tira-fundos, ganchos roscados, rebites, chavetas, contrapinos ou troços, arruelas (anilhas) (incluindo as de pressão) e artigos semelhantes, de ferro fundido, ferro ou aço" },
+        { cest: "10.059.00", ncm: "7323", descricao: "Palha de ferro ou aço, exceto os de uso doméstico classificados na posição NCM 7323.10.00" },
+        { cest: "10.059.01", ncm: "7323", descricao: "Esponjas, esfregões, luvas e artefatos semelhantes para limpeza, polimento e usos semelhantes, de ferro ou aço, exceto os de uso doméstico classificados na posição NCM 7323.10.00" },
+        { cest: "10.060.00", ncm: "7324", descricao: "Artefatos de higiene ou de toucador, e suas partes, de ferro fundido, ferro ou aço, incluídas as pias, banheiras, lavatórios, cubas, mictórios, tanques e afins de ferro fundido, ferro ou aço, para uso na construção" },
+        { cest: "10.061.00", ncm: "7325", descricao: "Outras obras moldadas, de ferro fundido, ferro ou aço, para uso na construção" },
+        { cest: "10.062.00", ncm: "7326", descricao: "Abraçadeiras" },
+        { cest: "10.063.00", ncm: "7407", descricao: "Barras de cobre" },
+        { cest: "10.064.00", ncm: "7411.10.10", descricao: "Tubos de cobre e suas ligas, para instalações de água quente e gás, para uso na construção" },
+        { cest: "10.065.00", ncm: "7412", descricao: "Acessórios para tubos (por exemplo, uniões, cotovelos, luvas ou mangas) de cobre e suas ligas, para uso na construção" },
+        { cest: "10.066.00", ncm: "7415", descricao: "Tachas, pregos, percevejos, escápulas e artefatos semelhantes, de cobre, ou de ferro ou aço com cabeça de cobre, parafusos, pinos ou pernos, roscados, porcas, ganchos roscados, rebites, chavetas, cavilhas, contrapinos, arruelas (incluídas as de pressão), e artefatos semelhantes, de cobre" },
+        { cest: "10.067.00", ncm: "7418.20.00", descricao: "Artefatos de higiene/toucador de cobre, para uso na construção" },
+        { cest: "10.068.00", ncm: "7607.19.90", descricao: "Manta de subcobertura aluminizada" },
+        { cest: "10.069.00", ncm: "7608", descricao: "Tubos de alumínio e suas ligas, para refrigeração e ar condicionado, para uso na construção" },
+        { cest: "10.070.00", ncm: "7609.00.00", descricao: "Acessórios para tubos (por exemplo, uniões, cotovelos, luvas ou mangas), de alumínio, para uso na construção" },
+        { cest: "10.071.00", ncm: "7610", descricao: "Construções e suas partes (por exemplo, pontes e elementos de pontes, torres, pórticos ou pilones, pilares, colunas, armações, estruturas para telhados, portas e janelas, e seus caixilhos, alizares e soleiras, balaustradas), de alumínio, exceto as construções pré-fabricadas da posição 9406; chapas, barras, perfis, tubos e semelhantes, de alumínio, próprios para construções" },
+        { cest: "10.072.00", ncm: "7615.20.00", descricao: "Artefatos de higiene/toucador de alumínio, para uso na construção" },
+        { cest: "10.073.00", ncm: "7616", descricao: "Outras obras de alumínio, próprias para construções, incluídas as persianas" },
+        { cest: "10.074.00", ncm: "8302.41.00", descricao: "Outras guarnições, ferragens e artigos semelhantes de metais comuns, para construções, inclusive puxadores." },
+        { cest: "10.075.00", ncm: "8301", descricao: "Fechaduras e ferrolhos (de chave, de segredo ou elétricos), de metais comuns, incluídas as suas partes fechos e armações com fecho, com fechadura, de metais comuns chaves para estes artigos, de metais comuns; exceto os de uso automotivo" },
+        { cest: "10.076.00", ncm: "8302.10.00", descricao: "Dobradiças de metais comuns, de qualquer tipo" },
+        { cest: "10.077.00", ncm: "8307", descricao: "Tubos flexíveis de metais comuns, mesmo com acessórios, para uso na construção" },
+        { cest: "10.078.00", ncm: "8311", descricao: "Fios, varetas, tubos, chapas, eletrodos e artefatos semelhantes, de metais comuns ou de carbonetos metálicos, revestidos exterior ou interiormente de decapantes ou de fundentes, para soldagem (soldadura) ou depósito de metal ou de carbonetos metálicos fios e varetas de pós de metais comuns aglomerados, para metalização por projeção" },
+        { cest: "10.079.00", ncm: "8481", descricao: "Torneiras, válvulas (incluídas as redutoras de pressão e as termostáticas) e dispositivos semelhantes, para canalizações, caldeiras, reservatórios, cubas e outros recipientes" },
+        { cest: "10.080.00", ncm: "7009", descricao: "Espelhos de vidro, mesmo emoldurados, exceto os de uso automotivo" },
+
+        // ANEXO XII - MATERIAIS DE LIMPEZA (alguns)
+        { cest: "11.001.00", ncm: "2828.90.11 2828.90.19 3206.41.00 3402.50.00 3808.94.19", descricao: "Água sanitária, branqueador e outros alvejantes" },
+        { cest: "11.002.00", ncm: "3401.20.90 3808.94.19", descricao: "Sabões, desinfetantes e sanitizantes, todos em pó, flocos, palhetas, grânulos ou outras formas semelhantes, para lavar roupas" },
+        { cest: "11.003.00", ncm: "3401.20.90 3808.94.19", descricao: "Sabões, desinfetantes e sanitizantes, todos líquidos para lavar roupas" },
+        { cest: "11.004.00", ncm: "3402.50.00", descricao: "Detergentes em pó, flocos, palhetas, grânulos ou outras formas semelhantes, inclusive adicionados de propriedades desinfetantes ou sanitizantes." },
+        { cest: "11.005.00", ncm: "3402.50.00", descricao: "Detergentes líquidos, exceto para lavar roupa" },
+        { cest: "11.006.00", ncm: "3402.50.00", descricao: "Detergente líquido para lavar roupa, inclusive adicionados de propriedades desinfetantes ou sanitizantes." },
+        { cest: "11.007.00", ncm: "3402", descricao: "Outros agentes orgânicos de superfície (exceto sabões); preparações tensoativas, preparações para lavagem (incluídas as preparações auxiliares para lavagem) e preparações para limpeza (inclusive multiuso e limpadores), mesmo contendo sabão, exceto os produtos descritos nos CEST 11.001.00, 11.004.00, 11.005.00 e 11.006.00; em embalagem de conteúdo inferior ou igual a 50 litros ou 50 kg" },
+        { cest: "11.008.00", ncm: "3809.91.90", descricao: "Amaciante/suavizante" },
+        { cest: "11.009.00", ncm: "3924.10.00 3924.90.00 6805.30.10 6805.30.90", descricao: "Esponjas para limpeza" },
+        { cest: "11.010.00", ncm: "2207 2208.90.00", descricao: "Álcool etílico para limpeza" },
+        { cest: "11.011.00", ncm: "7323.10.00", descricao: "Esponjas e palhas de aço; esponjas para limpeza, polimento ou uso semelhantes; todas de uso doméstico" },
+        { cest: "11.012.00", ncm: "3923.2", descricao: "Sacos de lixo de conteúdo igual ou inferior a 100 litros" },
+
+        // ANEXO XIV - MEDICAMENTOS (exemplos)
+        { cest: "13.001.00", ncm: "3003 3004", descricao: "Medicamentos de referência - positiva, exceto para uso veterinário" },
+        { cest: "13.001.01", ncm: "3003 3004", descricao: "Medicamentos de referência - negativa, exceto para uso veterinário" },
+        { cest: "13.001.02", ncm: "3003 3004", descricao: "Medicamentos de referência - neutra, exceto para uso veterinário" },
+        { cest: "13.002.00", ncm: "3003 3004", descricao: "Medicamentos genérico - positiva, exceto para uso veterinário" },
+        { cest: "13.002.01", ncm: "3003 3004", descricao: "Medicamentos genérico - negativa, exceto para uso veterinário" },
+        { cest: "13.002.02", ncm: "3003 3004", descricao: "Medicamentos genérico - neutra, exceto para uso veterinário" },
+        { cest: "13.003.00", ncm: "3003 3004", descricao: "Medicamentos similar - positiva, exceto para uso veterinário" },
+        { cest: "13.003.01", ncm: "3003 3004", descricao: "Medicamentos similar - negativa, exceto para uso veterinário" },
+        { cest: "13.003.02", ncm: "3003 3004", descricao: "Medicamentos similar - neutra, exceto para uso veterinário" },
+        { cest: "13.004.00", ncm: "3003 3004", descricao: "Outros tipos de medicamentos - positiva, exceto para uso veterinário" },
+        { cest: "13.004.01", ncm: "3003 3004", descricao: "Outros tipos de medicamentos - negativa, exceto para uso veterinário" },
+        { cest: "13.004.02", ncm: "3003 3004", descricao: "Outros tipos de medicamentos - neutra, exceto para uso veterinário" },
+        { cest: "13.005.00", ncm: "3006.60.00", descricao: "Preparações químicas contraceptivas de referência, à base de hormônios, de outros produtos da posição 29.37 ou de espermicidas - positiva." },
+        { cest: "13.005.01", ncm: "3006.60.00", descricao: "Preparações químicas contraceptivas de referência, à base de hormônios, de outros produtos da posição 29.37 ou de espermicidas - negativa." },
+        { cest: "13.006.00", ncm: "2936", descricao: "Provitaminas e vitaminas, naturais ou reproduzidas por síntese (incluídos os concentrados naturais), bem como os seus derivados utilizados principalmente como vitaminas, misturados ou não entre si, mesmo em quaisquer soluções neutra" },
+        { cest: "13.007.00", ncm: "3006.30", descricao: "Preparações opacificantes (contrastantes) para exames radiográficos e reagentes de diagnóstico concebidos para serem administrados ao paciente - positiva" },
+        { cest: "13.007.01", ncm: "3006.30", descricao: "Preparações opacificantes (contrastantes) para exames radiográficos e reagentes de diagnóstico concebidos para serem administrados ao paciente - negativa" },
+
+        // ANEXO XVI - PNEUMÁTICOS
+        { cest: "16.001.00", ncm: "4011.10.00", descricao: "Pneus novos, dos tipos utilizados em automóveis de passageiros (incluídos os veículos de uso misto - camionetas e os automóveis de corrida)" },
+        { cest: "16.002.00", ncm: "4011", descricao: "Pneus novos, dos tipos utilizados em caminhões (inclusive para os fora-de-estrada), ônibus, aviões, máquinas de terraplenagem, de construção e conservação de estradas, máquinas e tratores agrícolas, pá-carregadeira" },
+        { cest: "16.003.00", ncm: "4011.40.00", descricao: "Pneus novos para motocicletas" },
+        { cest: "16.004.00", ncm: "4011", descricao: "Outros tipos de pneus novos, exceto os itens classificados no CEST 16.005.00" },
+        { cest: "16.005.00", ncm: "4011.50.00", descricao: "Pneus novos de borracha dos tipos utilizados em bicicletas" },
+        { cest: "16.006.00", ncm: "4012.1", descricao: "Pneus recauchutados" },
+        { cest: "16.007.00", ncm: "4012.90", descricao: "Protetores de borracha, exceto os itens classificados no CEST 16.007.01" },
+        { cest: "16.007.01", ncm: "4012.90", descricao: "Protetores de borracha para bicicletas" },
+        { cest: "16.008.00", ncm: "4013", descricao: "Câmaras de ar de borracha, exceto os itens classificados no CEST 16.009.00" },
+        { cest: "16.009.00", ncm: "4013.20.00", descricao: "Câmaras de ar de borracha dos tipos utilizados em bicicletas" },
+
+        // ANEXO XVII - PRODUTOS ALIMENTÍCIOS (vários)
+        { cest: "17.001.00", ncm: "1704.90.10", descricao: "Chocolate branco, em embalagens de conteúdo inferior ou igual a 1 kg, exceto os classificados no CEST 17.005.00" },
+        { cest: "17.001.01", ncm: "1704.90.10", descricao: "Chocolate branco, em embalagens de conteúdo superior a 1 kg e inferior ou igual a 2 kg, exceto os classificados no CEST 17.005.00" },
+        { cest: "17.001.02", ncm: "1704.90.90", descricao: "Coberturas de chocolate branco e outros produtos de confeitaria com manteiga de cacau, em embalagens de conteúdo inferior ou igual a 1 kg, exceto os classificados no CEST 17.008.00" },
+        { cest: "17.001.03", ncm: "1704.90.90", descricao: "Coberturas de chocolate branco e outros produtos de confeitaria com manteiga de cacau, em embalagens de conteúdo superior a 1 kg e inferior ou igual a 2 kg, exceto os classificados no CEST 17.008.00" },
+        { cest: "17.002.00", ncm: "1806.31.10", descricao: "Chocolates, em tabletes, barras ou paus, recheados, em recipientes ou embalagens imediatas de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.002.01", ncm: "1806.31.10", descricao: "Chocolates, em tabletes, barras ou paus, recheados, em recipientes ou embalagens de conteúdo superior a 1 kg e inferior ou igual a 2 kg" },
+        { cest: "17.002.02", ncm: "1806.31.20", descricao: "Outras preparações alimentícias que contenham cacau, em tabletes, barras ou paus, recheados, em recipientes ou embalagens imediatas de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.002.03", ncm: "1806.31.20", descricao: "Outras preparações alimentícias que contenham cacau, em tabletes, barras ou paus, recheados, em recipientes ou embalagens de conteúdo superior a 1 kg e inferior ou igual a 2 kg" },
+        { cest: "17.003.00", ncm: "1806.32.10", descricao: "Chocolates, em tabletes, barras ou paus, não recheados, em recipientes ou embalagens imediatas de conteúdo inferior ou igual a 2 kg" },
+        { cest: "17.003.01", ncm: "1806.32.20", descricao: "Outras preparações alimentícias que contenham cacau, em tabletes, barras ou paus, não recheados, em recipientes ou embalagens imediatas de conteúdo inferior ou igual a 2 kg" },
+        { cest: "17.004.00", ncm: "1806.90.00", descricao: "Chocolates e outras preparações alimentícias contendo cacau, em embalagens de conteúdo inferior ou igual a 1 kg, exceto os classificados nos CEST 17.005.01, 17.006.00, 17.006.02, 17.007.00 e 17.109.00" },
+        { cest: "17.004.01", ncm: "1806.90.00", descricao: "Chocolates e outras preparações alimentícias contendo cacau, em embalagens de conteúdo superior a 1 kg e inferior ou igual a 2 kg, exceto os classificados nos CEST 17.005.01, 17.006.00, 17.006.02 e 17.007.00" },
+        { cest: "17.005.00", ncm: "1704.90.10", descricao: "Ovos de páscoa de chocolate branco" },
+        { cest: "17.005.01", ncm: "1806.90.00", descricao: "Ovos de páscoa de chocolate" },
+        { cest: "17.006.00", ncm: "1806.90.00", descricao: "Achocolatados em pó, em embalagens de conteúdo inferior ou igual a 1 kg, exceto os classificados no CEST 17.006.02" },
+        { cest: "17.006.01", ncm: "1806.10.00", descricao: "Cacau em pó, com adição de açúcar ou de outros edulcorantes, em embalagens de conteúdo inferior ou igual a 1kg" },
+        { cest: "17.006.02", ncm: "1806.90.00", descricao: "Achocolatados em pó, em cápsulas" },
+        { cest: "17.007.00", ncm: "1806.90.00", descricao: "Caixas de bombons contendo cacau, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.008.00", ncm: "1704.90.90", descricao: "Bombons, inclusive à base de chocolate branco sem cacau" },
+        { cest: "17.009.00", ncm: "1806.90.00", descricao: "Bombons, balas, caramelos, confeitos, pastilhas e outros produtos de confeitaria, contendo cacau" },
+        { cest: "17.010.00", ncm: "2009", descricao: "Sucos de frutas ou de produtos hortícolas; mistura de sucos" },
+        { cest: "17.011.00", ncm: "2009.89.2", descricao: "Água de coco" },
+        { cest: "17.012.00", ncm: "0402.1 0402.2 0402.9", descricao: "Leite em pó, blocos ou grânulos, exceto creme de leite" },
+        { cest: "17.013.00", ncm: "1901.10.20", descricao: "Farinha láctea" },
+        { cest: "17.014.00", ncm: "1901.10.10", descricao: "Leite modificado para alimentação de crianças" },
+        { cest: "17.015.00", ncm: "1901.10.90 1901.10.30", descricao: "Preparações para alimentação infantil à base de farinhas, grumos, sêmolas ou amidos e outros" },
+        { cest: "17.016.00", ncm: "0401.10.10 0401.20.10", descricao: "Leite longa vida (UHT - Ultra High Temperature), em recipiente de conteúdo inferior ou igual a 2 litros" },
+        { cest: "17.016.01", ncm: "0401.10.10 0401.20.10", descricao: "Leite longa vida (UHT - Ultra High Temperature), em recipiente de conteúdo superior a 2 litros e inferior ou igual a 5 litros" },
+        { cest: "17.017.00", ncm: "0401.40.10 0401.50.10", descricao: "Leite em recipiente de conteúdo inferior ou igual a 1 litro" },
+        { cest: "17.017.01", ncm: "0401.40.10 0401.50.10", descricao: "Leite em recipiente de conteúdo superior a 1 litro e inferior ou igual a 5 litros" },
+        { cest: "17.018.00", ncm: "0401.10.90 0401.20.90", descricao: "Leite do tipo pasteurizado em recipiente de conteúdo inferior ou igual a 1 litro" },
+        { cest: "17.018.01", ncm: "0401.10.90 0401.20.90", descricao: "Leite do tipo pasteurizado em recipiente de conteúdo superior a 1 litro e inferior ou igual a 5 litros" },
+        { cest: "17.019.00", ncm: "0401.40.2 0402.21.30 0402.29.30 0402.9", descricao: "Creme de leite, em recipiente de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.019.01", ncm: "0401.40.2 0402.21.30 0402.29.30 0402.9", descricao: "Creme de leite, em recipiente de conteúdo superior a 1 kg" },
+        { cest: "17.019.02", ncm: "0401.10 0401.20 0401.50 0402.10 0402.29.20", descricao: "Outros cremes de leite, em recipiente de conteúdo inferior ou igual a 1kg" },
+        { cest: "17.019.03", ncm: "0401.10 0401.20 0401.50 0402.10 0402.29.20", descricao: "Outros cremes de leite, em recipiente de conteúdo superior a 1kg" },
+        { cest: "17.020.00", ncm: "0402.9", descricao: "Leite condensado, em recipiente de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.020.01", ncm: "0402.9", descricao: "Leite condensado, em recipiente de conteúdo superior a 1 kg" },
+        { cest: "17.021.00", ncm: "0403", descricao: "Iogurte e leite fermentado em recipiente de conteúdo inferior ou igual a 2 litros, exceto o item classificado no CEST 17.022.00" },
+        { cest: "17.021.01", ncm: "0403", descricao: "Iogurte e leite fermentado em recipiente de conteúdo superior a 2 litros, exceto o item classificado no CEST 17.022.00" },
+        { cest: "17.022.00", ncm: "0403.90.00", descricao: "Coalhada" },
+        { cest: "17.023.00", ncm: "0406", descricao: "Requeijão e similares, em recipiente de conteúdo inferior ou igual a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.023.01", ncm: "0406", descricao: "Requeijão e similares, em recipiente de conteúdo superior a 1 kg" },
+        { cest: "17.024.00", ncm: "0406", descricao: "Queijos, exceto os dos CEST 17.024.01, 17.024.02, 17.024.03, 17.024.04 e 17.024.05" },
+        { cest: "17.024.01", ncm: "0406.10.10", descricao: "Queijo muçarela" },
+        { cest: "17.024.02", ncm: "0406.10.90", descricao: "Queijo minas frescal" },
+        { cest: "17.024.03", ncm: "0406.10.90", descricao: "Queijo ricota" },
+        { cest: "17.024.04", ncm: "0406.10.90", descricao: "Queijo petitsuisse" },
+        { cest: "17.024.05", ncm: "0406.10.90", descricao: "Queijo cremoso (cream cheese)" },
+        { cest: "17.025.00", ncm: "0405.10.00", descricao: "Manteiga, em embalagem de conteúdo inferior ou igual a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.025.01", ncm: "0405.10.00", descricao: "Manteiga, em embalagem de conteúdo superior a 1 kg" },
+        { cest: "17.025.02", ncm: "0405.90.90", descricao: "Manteiga de garrafa" },
+        { cest: "17.026.00", ncm: "1517.10.00", descricao: "Margarina e creme vegetal em recipiente de conteúdo inferior ou igual a 500 g, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.027.00", ncm: "1517.10.00", descricao: "Margarina e creme vegetal, em recipiente de conteúdo superior a 500 g e inferior ou igual a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.027.01", ncm: "1517.10.00", descricao: "Margarina e creme vegetal, em recipiente de conteúdo superior a 1 kg" },
+        { cest: "17.027.02", ncm: "1517.90", descricao: "Outras margarinas e cremes vegetais em recipiente de conteúdo inferior a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.028.00", ncm: "1516.20.00", descricao: "Gorduras e óleos vegetais e respectivas frações, parcial ou totalmente hidrogenados, interesterificados, reesterificados ou elaidinizados, mesmo refinados, mas não preparados de outro modo, em recipiente de conteúdo inferior ou igual a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.028.01", ncm: "1516.20.00", descricao: "Gorduras e óleos vegetais e respectivas frações, parcial ou totalmente hidrogenados, interesterificados, reesterificados ou elaidinizados, mesmo refinados, mas não preparados de outro modo, em recipiente de conteúdo superior a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.029.00", ncm: "1901.90.20", descricao: "Doces de leite" },
+        { cest: "17.030.00", ncm: "1904.10.00 1904.90.00", descricao: "Produtos à base de cereais, obtidos por expansão ou torrefação" },
+        { cest: "17.031.00", ncm: "1905.90.90", descricao: "Salgadinhos diversos, exceto os classificados no CEST 17.031.01 e 17.031.02" },
+        { cest: "17.031.01", ncm: "1905.90.90", descricao: "Salgadinhos diversos, derivados de farinha de trigo" },
+        { cest: "17.031.02", ncm: "1905.90.90", descricao: "Biscoitos de polvilho" },
+        { cest: "17.032.00", ncm: "2005.20.00 2005.9", descricao: "Batata frita, inhame e mandioca fritos" },
+        { cest: "17.033.00", ncm: "2008.1", descricao: "Amendoim e castanhas tipo aperitivo, em embalagem de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.033.01", ncm: "2008.1", descricao: "Amendoim e castanhas tipo aperitivo, em embalagem de conteúdo superior a 1 kg" },
+        { cest: "17.034.00", ncm: "2103.20.10", descricao: "Catchup em embalagens imediatas de conteúdo inferior ou igual a 650 g, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.035.00", ncm: "2103.90.21 2103.90.91", descricao: "Condimentos e temperos compostos, incluindo molho de pimenta e outros molhos, em embalagens imediatas de conteúdo inferior ou igual a 1 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 3 g" },
+        { cest: "17.036.00", ncm: "2103.10.10", descricao: "Molhos de soja preparados em embalagens imediatas de conteúdo inferior ou igual a 650 g, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.037.00", ncm: "2103.30.10", descricao: "Farinha de mostarda em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.038.00", ncm: "2103.30.21", descricao: "Mostarda preparada em embalagens imediatas de conteúdo inferior ou igual a 650 g, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.039.00", ncm: "2103.90.11", descricao: "Maionese em embalagens imediatas de conteúdo inferior ou igual a 650 g, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.040.00", ncm: "2002", descricao: "Tomates preparados ou conservados, exceto em vinagre ou em ácido acético, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.041.00", ncm: "2103.20.10", descricao: "Molhos de tomate em embalagens imediatas de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.042.00", ncm: "1704.90.90 1904.20.00 1904.90.00", descricao: "Barra de cereais" },
+        { cest: "17.043.00", ncm: "1806.31.20 1806.32.20 1806.90.00", descricao: "Barra de cereais contendo cacau" },
+        { cest: "17.044.00", ncm: "1101.00.10", descricao: "Farinha de trigo especial, em embalagem inferior ou igual a 1 kg" },
+        { cest: "17.044.01", ncm: "1101.00.10", descricao: "Farinha de trigo especial, em embalagem superior a 1 kg e inferior a 5 kg" },
+        { cest: "17.044.02", ncm: "1101.00.10", descricao: "Farinha de trigo especial, em embalagem igual a 5 kg" },
+        { cest: "17.044.03", ncm: "1101.00.10", descricao: "Farinha de trigo especial, em embalagem superior a 5 kg e inferior ou igual a 25 kg" },
+        { cest: "17.044.04", ncm: "1101.00.10", descricao: "Farinha de trigo especial, em embalagem superior a 25 kg e inferior ou igual a 50 kg" },
+        { cest: "17.044.05", ncm: "1101.00.10", descricao: "Farinha de trigo comum, em embalagem igual a 5 kg" },
+        { cest: "17.044.06", ncm: "1101.00.10", descricao: "Farinha de trigo comum, em embalagem superior a 5 kg e inferior ou igual a 25 kg" },
+        { cest: "17.044.07", ncm: "1101.00.10", descricao: "Farinha de trigo comum, em embalagem superior a 25 kg e inferior ou igual a 50 kg" },
+        { cest: "17.044.08", ncm: "1101.00.10", descricao: "Farinha de trigo doméstica especial, em embalagem superior a 5 kg e inferior e igual a 10 kg" },
+        { cest: "17.044.09", ncm: "1101.00.10", descricao: "Farinha de trigo doméstica com fermento, em embalagem superior a 5 kg e inferior e igual a 10 kg" },
+        { cest: "17.046.00", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para bolos, em embalagem inferior 5 kg" },
+        { cest: "17.046.01", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para bolos, em embalagem igual a 5 kg" },
+        { cest: "17.046.02", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para bolos, em embalagem superior a 5 kg e inferior ou igual a 25 Kg" },
+        { cest: "17.046.03", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para bolos, em embalagem superior a 25 kg e inferior ou igual a 50 Kg" },
+        { cest: "17.046.04", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para bolos, em embalagem superior a 50 Kg" },
+        { cest: "17.046.05", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com menos de 80% de farinha de trigo na sua composição final, em embalagem inferior a 5 kg" },
+        { cest: "17.046.06", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com menos de 80% de farinha de trigo na sua composição final, em embalagem igual a 5 kg" },
+        { cest: "17.046.07", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com menos de 80% de farinha de trigo na sua composição final, em embalagem superior a 5 kg e inferior ou igual a 25 Kg" },
+        { cest: "17.046.08", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com menos de 80% de farinha de trigo na sua composição final, em embalagem superior a 25 kg e inferior ou igual a 50 Kg" },
+        { cest: "17.046.09", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com menos de 80% de farinha de trigo na sua composição final, em embalagem superior a 50 Kg" },
+        { cest: "17.046.10", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com, no mínimo, 80% de farinha de trigo na sua composição final, em embalagem inferior a 5 kg" },
+        { cest: "17.046.11", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com, no mínimo, 80% de farinha de trigo na sua composição final, em embalagem igual a 5 kg" },
+        { cest: "17.046.12", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com, no mínimo, 80% de farinha de trigo na sua composição final, em embalagem superior a 5 kg e inferior ou igual a 25 Kg" },
+        { cest: "17.046.13", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com, no mínimo, 80% de farinha de trigo na sua composição final, em embalagem superior a 25 kg e inferior ou igual a 50 Kg" },
+        { cest: "17.046.14", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações para pães com, no mínimo, 80% de farinha de trigo na sua composição final, em embalagem superior a 50 Kg" },
+        { cest: "17.046.15", ncm: "1901.20 1901.90.90", descricao: "Misturas e pastas para a preparação de produtos de padaria, pastelaria e da indústria de bolachas e biscoitos, da posição 19.05, exceto os previstos nos CEST 17.046.00 a 17.046.14 e 17.046.16." },
+        { cest: "17.046.16", ncm: "1901.20 1901.90.90", descricao: "Misturas e preparações com, no mínimo, 80% de farinha de trigo na sua composição final, exceto as descritas nos CEST 17.046.10 a 17.046.15." },
+        { cest: "17.047.00", ncm: "1902.30.00", descricao: "Massas alimentícias tipo instantânea, exceto as descritas no CEST 17047.01." },
+        { cest: "17.047.01", ncm: "1902.30.00", descricao: "Massas alimentícias tipo instantânea, derivadas de farinha de trigo." },
+        { cest: "17.048.00", ncm: "1902", descricao: "Massas alimentícias, cozidas ou recheadas (de carne ou de outras substâncias) ou preparadas de outro modo, exceto as descritas nos CEST 17.047.00, 17.048.01, e 17.048.02" },
+        { cest: "17.048.01", ncm: "1902.40.00", descricao: "Cuscuz" },
+        { cest: "17.048.02", ncm: "1902.20.00", descricao: "Massas alimentícias recheadas (mesmo cozidas ou preparadas de outro modo)" },
+        { cest: "17.049.00", ncm: "1902.1", descricao: "Massas alimentícias do tipo comum, não cozidas, nem recheadas, nem preparadas de outro modo, não derivadas do trigo" },
+        { cest: "17.049.01", ncm: "1902.1", descricao: "Massas alimentícias do tipo sêmola, não cozidas, nem recheadas, nem preparadas de outro modo, não derivadas do trigo" },
+        { cest: "17.049.02", ncm: "1902.11.00", descricao: "Massas alimentícias do tipo grano duro, não cozidas, nem recheadas, nem preparadas de outro modo, que contenham ovos" },
+        { cest: "17.049.03", ncm: "1902.19.00", descricao: "Outras massas alimentícias do tipo comum, não cozidas, nem recheadas, nem preparadas de outro modo, que não contenham ovos, derivadas de farinha de trigo" },
+        { cest: "17.049.04", ncm: "1902.19.00", descricao: "Outras massas alimentícias do tipo sêmola, não cozidas, nem recheadas, nem preparadas de outro modo, que não contenham ovos, derivadas do trigo" },
+        { cest: "17.049.05", ncm: "1902.19.00", descricao: "Outras massas alimentícias do tipo grano duro, não cozidas, nem recheadas, nem preparadas de outro modo, que não contenham ovos" },
+        { cest: "17.049.06", ncm: "1902.11.00", descricao: "Massas alimentícias do tipo comum, não cozidas, nem recheadas, nem preparadas de outro modo, que contenham ovos, derivadas de farinha de trigo" },
+        { cest: "17.049.07", ncm: "1902.11.00", descricao: "Massas alimentícias do tipo sêmola, não cozidas, nem recheadas, nem preparadas de outro modo, que contenham ovos, derivadas do trigo" },
+        { cest: "17.050.00", ncm: "1905.20", descricao: "Pães industrializados, inclusive de especiarias, exceto panetones e bolo de forma" },
+        { cest: "17.051.00", ncm: "1905.20.90", descricao: "Bolo de forma, inclusive de especiarias" },
+        { cest: "17.052.00", ncm: "1905.20.10", descricao: "Panetones" },
+        { cest: "17.053.00", ncm: "1905.31.00", descricao: "Biscoitos e bolachas derivados de farinha de trigo; (exceto dos tipos cream cracker, água e sal, maisena, maria e outros de consumo popular que não sejam adicionados de cacau, nem recheados, cobertos ou amanteigados, independentemente de sua denominação comercial)" },
+        { cest: "17.053.01", ncm: "1905.31.00", descricao: "Biscoitos e bolachas derivados de farinha de trigo dos tipos maisena e maria e outros de consumo popular que não sejam adicionados de cacau, nem recheados, cobertos ou amanteigados, independentemente de sua denominação comercial, exceto o CEST 17.053.02" },
+        { cest: "17.053.02", ncm: "1905.31.00", descricao: "Biscoitos e bolachas derivados de farinha de trigo dos tipos cream cracker e água e sal de consumo popular" },
+        { cest: "17.054.00", ncm: "1905.31.00", descricao: "Biscoitos e bolachas não derivados de farinha de trigo; (exceto dos tipos cream cracker, água e sal, maisena e maria e outros de consumo popular que não sejam adicionados de cacau, nem recheados, cobertos ou amanteigados, independentemente de sua denominação comercial)" },
+        { cest: "17.054.01", ncm: "1905.31.00", descricao: "Biscoitos e bolachas não derivados de farinha de trigo dos tipos maisena e maria e outros de consumo popular que não sejam adicionados de cacau, nem recheados, cobertos ou amanteigados, independentemente de sua denominação comercial, exceto o CEST 17.054.02" },
+        { cest: "17.054.02", ncm: "1905.31.00", descricao: "Biscoitos e bolachas não derivados de farinha de trigo dos tipos cream cracker e água e sal de consumo popular" },
+        { cest: "17.056.00", ncm: "1905.90.20", descricao: "Biscoitos e bolachas derivados de farinha de trigo dos tipos cream cracker e água e sal" },
+        { cest: "17.056.01", ncm: "1905.90.20", descricao: "Biscoitos e bolachas não derivados de farinha de trigo dos tipos cream cracker e água e sal" },
+        { cest: "17.056.02", ncm: "1905.90.20", descricao: "Outras bolachas, exceto casquinhas para sorvete e os biscoitos e bolachas relacionados nos CEST 17.056.00 e 17.056.01" },
+        { cest: "17.057.00", ncm: "1905.32.00", descricao: "Waffles e wafers - sem cobertura" },
+        { cest: "17.058.00", ncm: "1905.32.00", descricao: "Waffles e wafers - com cobertura" },
+        { cest: "17.059.00", ncm: "1905.40.00", descricao: "Torradas, pão torrado e produtos semelhantes torrados" },
+        { cest: "17.060.00", ncm: "1905.90.10", descricao: "Outros pães de forma" },
+        { cest: "17.062.00", ncm: "1905.90.90", descricao: "Outros pães, exceto o classificado no CEST 17.062.03" },
+        { cest: "17.062.01", ncm: "1905.90.90", descricao: "Outros bolos industrializados e produtos de panificação não especificados anteriormente, incluindo as pizzas; exceto os classificados nos CEST 17.062.02 e 17.062.03" },
+        { cest: "17.062.02", ncm: "1905.90.20 1905.90.90", descricao: "Casquinhas para sorvete" },
+        { cest: "17.062.03", ncm: "1905.90.90", descricao: "Pão francês até 200g" },
+        { cest: "17.063.00", ncm: "1905.10.00", descricao: "Pão denominado knackebrot" },
+        { cest: "17.064.00", ncm: "1905.90", descricao: "Demais pães industrializados" },
+        { cest: "17.065.00", ncm: "1507.90.11", descricao: "Óleo de soja refinado, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.066.00", ncm: "1508", descricao: "Óleo de amendoim refinado, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.067.00", ncm: "1509", descricao: "Azeites de oliva, em recipientes com capacidade inferior a 2 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 20 mililitros" },
+        { cest: "17.067.01", ncm: "1509", descricao: "Azeites de oliva, em recipientes com capacidade igual ou superior a 2 litros e inferior ou igual a 5 litros" },
+        { cest: "17.067.02", ncm: "1509", descricao: "Azeites de oliva, em recipientes com capacidade superior a 5 litros" },
+        { cest: "17.068.00", ncm: "1510", descricao: "Outros óleos e respectivas frações, obtidos exclusivamente a partir de azeitonas, mesmo refinados, mas não quimicamente modificados, e misturas desses óleos ou frações com óleos ou frações da posição 15.09, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.069.00", ncm: "1512.19.11", descricao: "Óleo de girassol em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.069.01", ncm: "1512.29.10", descricao: "Óleo de algodão refinado em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.070.00", ncm: "1514.1", descricao: "Óleo de canola, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.071.00", ncm: "1515.19.00", descricao: "Óleo de linhaça refinado, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.072.00", ncm: "1515.29.10", descricao: "Óleo de milho refinado, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.073.00", ncm: "1512.29.90", descricao: "Outros óleos refinados, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.074.00", ncm: "1517.90.10", descricao: "Misturas de óleos refinados, para consumo humano, em recipientes com capacidade inferior ou igual a 5 litros, exceto as embalagens individuais de conteúdo inferior ou igual a 15 mililitros" },
+        { cest: "17.075.00", ncm: "1511 1513 1514 1515 1516 1518", descricao: "Outros óleos vegetais comestíveis não especificados anteriormente" },
+        { cest: "17.076.00", ncm: "1601.00.00", descricao: "Enchidos (embutidos) e produtos semelhantes, de carne, miudezas ou sangue; exceto salsicha, linguiça e mortadela" },
+        { cest: "17.077.00", ncm: "1601.00.00", descricao: "Salsicha e linguiça, exceto as descritas nos CEST 17.077.01" },
+        { cest: "17.077.01", ncm: "1601.00.00", descricao: "Salsicha em lata" },
+        { cest: "17.078.00", ncm: "1601.00.00", descricao: "Mortadela" },
+        { cest: "17.079.00", ncm: "1602", descricao: "Outras preparações e conservas de carne, miudezas ou de sangue, exceto as descritas nos CEST 17.079.01, 17.079.02, 17.079.03, 17.079.04, 17.079.05, 17.079.06, 17.079.07 e 17.079.08" },
+        { cest: "17.079.01", ncm: "1602.31.00", descricao: "Outras preparações e conservas de carne, de miudezas ou de sangue, de aves da posição 01.05: de peruas e de perus, exceto as descritas no CEST 17.079.08" },
+        { cest: "17.079.02", ncm: "1602.32.10", descricao: "Outras preparações e conservas de carne, de miudezas ou de sangue, de aves da posição 01.05: de galos e de galinhas, com conteúdo de carne ou de miudezas superior ou igual a 57 %, em peso, não cozidas, exceto as descritas no CEST 17.079.08" },
+        { cest: "17.079.03", ncm: "1602.32.20", descricao: "Outras preparações e conservas de carne, de miudezas ou de sangue, de aves da posição 01.05: de galos e de galinhas, com conteúdo de carne ou de miudezas superior ou igual a 57 %, em peso, cozidas, exceto as descritas no CEST 17.079.08" },
+        { cest: "17.079.04", ncm: "1602.41.00", descricao: "Outras preparações e conservas de carne, de miudezas ou de sangue, da espécie suína: pernas e respectivos pedaços" },
+        { cest: "17.079.05", ncm: "1602.49.00", descricao: "Outras preparações e conservas de carne, de miudezas ou de sangue, da espécie suína: outras, incluindo as misturas, exceto os descritos no CEST 17.079.07" },
+        { cest: "17.079.06", ncm: "1602.50.00", descricao: "Outras preparações e conservas de carne, de miudezas ou de sangue, da espécie bovina" },
+        { cest: "17.079.07", ncm: "1602.49.00", descricao: "Apresuntado" },
+        { cest: "17.079.08", ncm: "1602.31 1602.32", descricao: "Carnes de aves inteiras e com peso unitário superior a 3 kg, temperadas" },
+        { cest: "17.080.00", ncm: "1604", descricao: "Preparações e conservas de peixes; caviar e seus sucedâneos preparados a partir de ovas de peixe; exceto os descritos nos CEST 17.080.01 e 17.081.00" },
+        { cest: "17.080.01", ncm: "1604.20.10", descricao: "Outras preparações e conservas de atuns" },
+        { cest: "17.081.00", ncm: "1604", descricao: "Sardinha em conserva" },
+        { cest: "17.082.00", ncm: "1605", descricao: "Crustáceos, moluscos e outros invertebrados aquáticos, preparados ou em conservas" },
+        { cest: "17.083.00", ncm: "0210.20.00 0210.99.00 1502", descricao: "Carne de gado bovino, ovino e bufalino e produtos comestíveis resultantes da matança desse gado submetidos à salga, secagem ou desidratação, exceto os descritos no CEST 17.083.01" },
+        { cest: "17.083.01", ncm: "0210.20.00 0210.99.00 1502", descricao: "Carne de gado bovino, ovino e bufalino e produtos comestíveis resultantes da matança desse gado submetidos à salga, secagem ou desidratação" },
+        { cest: "17.084.00", ncm: "0201 0202 0204 0206", descricao: "Carne de gado bovino, ovino e bufalino e demais produtos comestíveis resultantes da matança desse gado frescos, refrigerados ou congelados" },
+        { cest: "17.085.00", ncm: "0204", descricao: "Carnes de animais das espécies caprina, frescas, refrigeradas ou congeladas" },
+        { cest: "17.086.00", ncm: "0210.99.00 1502.10.19 1502.90.00", descricao: "Carnes e demais produtos comestíveis frescos, resfriados, congelados, salgados ou salmourados resultantes do abate de caprinos" },
+        { cest: "17.087.00", ncm: "0207 0209 0210.99.00 1501", descricao: "Carnes e demais produtos comestíveis frescos, resfriados, congelados, salgados, em salmoura, simplesmente temperados, secos ou defumados, resultantes do abate de aves, exceto os descritos no CEST 17.087.02" },
+        { cest: "17.087.01", ncm: "0203 0206 0209 0210.1 0210.99.00 1501", descricao: "Carnes e demais produtos comestíveis frescos, resfriados, congelados, salgados, em salmoura, simplesmente temperados, secos ou defumados, resultantes do abate de suínos" },
+        { cest: "17.087.02", ncm: "0207.1 0207.2", descricao: "Carnes de aves inteiras e com peso unitário superior a 3 kg" },
+        { cest: "17.088.00", ncm: "0710", descricao: "Produtos hortícolas, cozidos em água ou vapor, congelados, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.088.01", ncm: "0710", descricao: "Produtos hortícolas, cozidos em água ou vapor, congelados, em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.089.00", ncm: "0811", descricao: "Frutas, não cozidas ou cozidas em água ou vapor, congeladas, mesmo adicionadas de açúcar ou de outros edulcorantes, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.089.01", ncm: "0811", descricao: "Frutas, não cozidas ou cozidas em água ou vapor, congeladas, mesmo adicionadas de açúcar ou de outros edulcorantes, em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.090.00", ncm: "2001", descricao: "Produtos hortícolas, frutas e outras partes comestíveis de plantas, preparados ou conservados em vinagre ou em ácido acético, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.090.01", ncm: "2001", descricao: "Produtos hortícolas, frutas e outras partes comestíveis de plantas, preparados ou conservados em vinagre ou em ácido acético, em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.091.00", ncm: "2004", descricao: "Outros produtos hortícolas preparados ou conservados, exceto em vinagre ou em ácido acético, congelados, com exceção dos produtos da posição 20.06, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.091.01", ncm: "2004", descricao: "Outros produtos hortícolas preparados ou conservados, exceto em vinagre ou em ácido acético, congelados, com exceção dos produtos da posição 20.06, em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.092.00", ncm: "2005", descricao: "Outros produtos hortícolas preparados ou conservados, exceto em vinagre ou em ácido acético, não congelados, com exceção dos produtos da posição 20.06, excluídos batata, inhame e mandioca fritos, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.092.01", ncm: "2005", descricao: "Outros produtos hortícolas preparados ou conservados, exceto em vinagre ou em ácido acético, não congelados, com exceção dos produtos da posição 20.06, excluídos batata, inhame e mandioca fritos, em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.093.00", ncm: "2006.00.00", descricao: "Produtos hortícolas, frutas, cascas de frutas e outras partes de plantas, conservados com açúcar (passados por calda, glaceados ou cristalizados), em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.093.01", ncm: "2006.00.00", descricao: "Produtos hortícolas, frutas, cascas de frutas e outras partes de plantas, conservados com açúcar (passados por calda, glaceados ou cristalizados), em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.094.00", ncm: "2007", descricao: "Doces, geleias, marmelades, purês e pastas de frutas, obtidos por cozimento, com ou sem adição de açúcar ou de outros edulcorantes, em embalagens de conteúdo inferior ou igual a 1 kg, exceto as embalagens individuais de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.094.01", ncm: "2007", descricao: "Doces, geleias, marmelades, purês e pastas de frutas, obtidos por cozimento, com ou sem adição de açúcar ou de outros edulcorantes, em embalagens de conteúdo superior a 1 kg" },
+        { cest: "17.095.00", ncm: "2008", descricao: "Frutas e outras partes comestíveis de plantas, preparadas ou conservadas de outro modo, com ou sem adição de açúcar ou de outros edulcorantes ou de álcool, não especificadas nem compreendidas em outras posições, excluídos os amendoins e castanhas tipo aperitivo, da posição 2008.1, em embalagens de conteúdo inferior ou igual a 1 kg" },
+        { cest: "17.095.01", ncm: "2008", descricao: "Frutas e outras partes comestíveis de plantas, preparadas ou conservadas de outro modo, com ou sem adição de açúcar ou de outros edulcorantes ou de álcool, não especificadas nem compreendidas em outras posições, excluídos os amendoins e castanhas tipo aperitivo, da posição 2008.1, em embalagens superior a 1 kg" },
+        { cest: "17.096.00", ncm: "0901", descricao: "Café torrado e moído, em embalagens de conteúdo inferior ou igual a 2 kg, exceto os classificados nos CEST 17.096.04 e 17.096.05" },
+        { cest: "17.096.01", ncm: "0901", descricao: "Café torrado e moído, em embalagens de conteúdo superior a 2 kg" },
+        { cest: "17.096.02", ncm: "0901", descricao: "Café torrado em grão, em embalagens de conteúdo inferior ou igual a 2 kg" },
+        { cest: "17.096.03", ncm: "0901", descricao: "Café torrado em grão, em embalagens de conteúdo superior a 2 kg" },
+        { cest: "17.096.04", ncm: "0901", descricao: "Café torrado e moído, em cápsulas, exceto os descritos no CEST 17.096.05" },
+        { cest: "17.096.05", ncm: "0901", descricao: "Café descafeinado torrado e moído, em cápsulas" },
+        { cest: "17.097.00", ncm: "0902 1211.90.90 2106.90.90", descricao: "Chá, mesmo aromatizado" },
+        { cest: "17.098.00", ncm: "0903.00", descricao: "Mate" },
+        { cest: "17.099.00", ncm: "1701.1 1701.99.00", descricao: "Açúcar refinado, em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.099.01", ncm: "1701.1 1701.99.00", descricao: "Açúcar refinado, em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.099.02", ncm: "1701.1 1701.99.00", descricao: "Açúcar refinado, em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.100.00", ncm: "1701.91.00", descricao: "Açúcar refinado adicionado de aromatizante ou de corante em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.100.01", ncm: "1701.91.00", descricao: "Açúcar refinado adicionado de aromatizante ou de corante em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.100.02", ncm: "1701.91.00", descricao: "Açúcar refinado adicionado de aromatizante ou de corante em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.101.00", ncm: "1701.1 1701.99.00", descricao: "Açúcar cristal, em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.101.01", ncm: "1701.1 1701.99.00", descricao: "Açúcar cristal, em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.101.02", ncm: "1701.91", descricao: "Açúcar cristal, em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.102.00", ncm: "1701.91.00", descricao: "Açúcar cristal adicionado de aromatizante ou de corante, em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.102.01", ncm: "1701.91.00", descricao: "Açúcar cristal adicionado de aromatizante ou de corante, em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.102.02", ncm: "1701.91", descricao: "Açúcar cristal adicionado de aromatizante ou de corante, em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.103.00", ncm: "1701.1 1701.99.00", descricao: "Outros tipos de açúcar, em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.103.01", ncm: "1701.1 1701.99.00", descricao: "Outros tipos de açúcar, em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.103.02", ncm: "1701.1 1701.99.00", descricao: "Outros tipos de açúcar, em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.104.00", ncm: "1701.91.00", descricao: "Outros tipos de açúcar adicionado de aromatizante ou de corante, em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.104.01", ncm: "1701.91.00", descricao: "Outros tipos de açúcar adicionado de aromatizante ou de corante, em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.104.02", ncm: "1701.91.00", descricao: "Outros tipos de açúcar adicionado de aromatizante ou de corante, em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.105.00", ncm: "1702", descricao: "Outros açúcares em embalagens de conteúdo inferior ou igual a 2 kg, exceto as embalagens contendo envelopes individualizados (sachês) de conteúdo inferior ou igual a 10 g" },
+        { cest: "17.105.01", ncm: "1702", descricao: "Outros açúcares, em embalagens de conteúdo superior a 2 kg e inferior ou igual a 5 kg" },
+        { cest: "17.105.02", ncm: "1702", descricao: "Outros açúcares, em embalagens de conteúdo superior a 5 kg" },
+        { cest: "17.106.00", ncm: "2008.19.00", descricao: "Milho para pipoca (micro-ondas)" },
+        { cest: "17.107.00", ncm: "2101.1", descricao: "Extratos, essências e concentrados de café e preparações à base destes extratos, essências ou concentrados ou à base de café, em embalagens de conteúdo inferior ou igual a 500 g, exceto os classificados no CEST 17.107.01" },
+        { cest: "17.107.01", ncm: "2101.1", descricao: "Extratos, essências e concentrados de café e preparações à base destes extratos, essências ou concentrados ou à base de café, em cápsulas" },
+        { cest: "17.108.00", ncm: "2101.20", descricao: "Extratos, essências e concentrados de chá ou de mate e preparações à base destes extratos, essências ou concentrados ou à base de chá ou de mate, em embalagens de conteúdo inferior ou igual a 500 g, exceto as bebidas prontas à base de mate ou chá e os itens classificados no CEST 17.108.01" },
+        { cest: "17.108.01", ncm: "2101.20", descricao: "Extratos, essências e concentrados de chá ou de mate e preparações à base destes extratos, essências ou concentrados ou à base de chá ou de mate, em cápsulas" },
+        { cest: "17.109.00", ncm: "1806.90.00 1901.90.90 2101.11.90 2101.12.00", descricao: "Preparações em pó para cappuccino e similares, em embalagens de conteúdo inferior ou igual a 500 g" },
+        { cest: "17.110.00", ncm: "2202.10.00", descricao: "Refrescos e outras bebidas prontas para beber, à base de chá e mate" },
+        { cest: "17.111.00", ncm: "2202.10.00", descricao: "Refrescos e outras bebidas não alcoólicas, exceto os refrigerantes e as demais bebidas nos CEST 03.007.00 e 17.110.00" },
+        { cest: "17.112.00", ncm: "2202.99.00", descricao: "Néctares de frutas e outras bebidas não alcoólicas prontas para beber, exceto bebidas hidroeletrolíticas e energéticos" },
+        { cest: "17.113.00", ncm: "2101.20 2202.99.00", descricao: "Bebidas prontas à base de mate ou chá" },
+        { cest: "17.114.00", ncm: "2202.99.00", descricao: "Bebidas prontas à base de café" },
+        { cest: "17.115.00", ncm: "2202.99.00", descricao: "Bebidas alimentares prontas à base de soja, leite ou cacau, inclusive os produtos denominados bebidas lácteas" },
+        { cest: "17.116.00", ncm: "08.13 09.09", descricao: "Sementes de anis (erva-doce), badiana (anis-estrelado), funcho, coentro, cominho ou alcaravia; bagas de zimbro; fruta seca, misturas de fruta seca ou de fruta de casa rija; quando acondicionadas em saquinhos, especialmente, para a preparação de infusões ou de tisanas (chás)" },
+        { cest: "17.117.00", ncm: "1806.20.00", descricao: "Outras preparações em blocos ou em barras, com peso superior a 2kg, ou no estado líquido, em pasta, em pó, grânulos ou formas semelhantes, em recipientes ou embalagens imediatas de conteúdo superior a 2kg" },
+
+        // ANEXO XX - ELETRODOMÉSTICOS (amostra)
+        { cest: "21.001.00", ncm: "7321.11.00 7321.81.00 7321.90.00", descricao: "Fogões de cozinha de uso doméstico e suas partes" },
+        { cest: "21.002.00", ncm: "8418.10.00", descricao: "Combinações de refrigeradores e congeladores (freezers), munidos de portas exteriores separadas" },
+        { cest: "21.003.00", ncm: "8418.21.00", descricao: "Refrigeradores do tipo doméstico, de compressão" },
+        { cest: "21.004.00", ncm: "8418.29.00", descricao: "Outros refrigeradores do tipo doméstico" },
+        { cest: "21.005.00", ncm: "8418.30.00", descricao: "Congeladores (freezers) horizontais tipo arca, de capacidade não superior a 800 litros" },
+        { cest: "21.006.00", ncm: "8418.40.00", descricao: "Congeladores (freezers) verticais tipo armário, de capacidade não superior a 900 litros" },
+        { cest: "21.007.00", ncm: "8418.50", descricao: "Outros móveis (arcas, armários, vitrines, balcões e móveis semelhantes) para a conservação e exposição de produtos, que incorporem um equipamento para a produção de frio" },
+        { cest: "21.008.00", ncm: "8418.69.9", descricao: "Mini adega e similares" },
+        { cest: "21.009.00", ncm: "8418.69.99", descricao: "Máquinas para produção de gelo" },
+        { cest: "21.010.00", ncm: "8418.99.00", descricao: "Partes dos refrigeradores, congeladores, mini adegas e similares, máquinas para produção de gelo e bebedouros descritos nos CEST 21.002.00, 21.003.00, 21.004.00, 21.005.00, 21.006.00, 21.007.00, 21.008.00, 21.009.00 e 21.013.00" },
+        { cest: "21.011.00", ncm: "8421.12", descricao: "Secadoras de roupa de uso doméstico" },
+        { cest: "21.012.00", ncm: "8421.19.90", descricao: "Outras secadoras de roupas e centrífugas de uso doméstico" },
+        { cest: "21.013.00", ncm: "8418.69.31", descricao: "Bebedouros refrigerados para água" },
+        { cest: "21.014.00", ncm: "8421.9", descricao: "Partes das secadoras de roupas e centrífugas de uso doméstico e dos aparelhos para filtrar ou depurar água, descritos nos CEST 21.011.00 e 21.012.00 e 21.098.00" },
+        { cest: "21.015.00", ncm: "8422.11.00 8422.90.10", descricao: "Máquinas de lavar louça do tipo doméstico e suas partes" },
+        { cest: "21.028.00", ncm: "8471.30", descricao: "Máquinas automáticas para processamento de dados, portáteis, de peso não superior a 10 kg, contendo pelo menos uma unidade central de processamento, um teclado e uma tela" },
+        { cest: "21.040.00", ncm: "8508", descricao: "Aspiradores" },
+        { cest: "21.045.00", ncm: "8516.50.00", descricao: "Fornos de micro-ondas" },
+        { cest: "21.053.00", ncm: "8517.13.00 8517.14.3", descricao: "Telefones inteligentes (smartphones) e para redes celulares, excetos por satélite, os de uso automotivo e os classificados nos CEST 21.053.01" },
+        { cest: "21.053.01", ncm: "8517.13.00 8517.14.31", descricao: "Telefones inteligentes (smartphones) e para redes celulares portáteis, excetos por satélite" },
+        { cest: "21.069.00", ncm: "8528.7", descricao: "Aparelhos receptores de televisão - Televisores de CRT (tubo de raios catódicos)" },
+        { cest: "21.070.00", ncm: "8528.7", descricao: "Aparelhos receptores de televisão - Televisores de LCD (Display de Cristal Líquido)" },
+        { cest: "21.071.00", ncm: "8528.7", descricao: "Aparelhos receptores de televisão - Televisores de Plasma" },
+        { cest: "21.092.00", ncm: "8415.10 8415.8", descricao: "Máquinas e aparelhos de ar condicionado contendo um ventilador motorizado e dispositivos próprios para modificar a temperatura e a umidade" },
+        { cest: "21.093.00", ncm: "8415.10.11", descricao: "Aparelhos de ar-condicionado tipo Split System (sistema com elementos separados) com unidade externa e interna" },
+        { cest: "21.127.00", ncm: "8517.62.77", descricao: "Aparelho emissor com receptor incorporado, digital, com tecnologias de transmissão/recepção sem fio, tela sensível ao toque smartwatch" },
+
+        // ANEXO XXI - RAÇÕES
+        { cest: "22.001.00", ncm: "2309", descricao: "Ração tipo pet para animais domésticos" },
+
+        // ANEXO XXII - SORVETES
+        { cest: "23.001.00", ncm: "2105.00", descricao: "Sorvetes de qualquer espécie" },
+        { cest: "23.002.00", ncm: "1806 1901 2106 0404", descricao: "Preparados para fabricação de sorvete em máquina" },
+
+        // ANEXO XXIII - TINTAS
+        { cest: "24.001.00", ncm: "3208 3209 3210.00", descricao: "Tintas, vernizes" },
+        { cest: "24.002.00", ncm: "2821 3204.17.00 3206", descricao: "Xadrez e pós assemelhados, em embalagem de conteúdo inferior ou igual a 1 kg, exceto pigmentos à base de dióxido de titânio classificados no código NCM 3206.11.10" },
+        { cest: "24.002.01", ncm: "2821 3204.17.00 3206", descricao: "Xadrez e pós assemelhados, em embalagem de conteúdo superior a 1 kg, exceto pigmentos à base de dióxido de titânio classificados no código NCM 3206.11.10" },
+        { cest: "24.003.00", ncm: "3204 3205.00.00 3206 3212", descricao: "Corantes para aplicação em bases, tintas e vernizes" },
+
+        // ANEXO XXIV - VEÍCULOS AUTOMOTORES
+        { cest: "25.001.00", ncm: "8702.10.00", descricao: "Veículos automóveis para transporte de 10 pessoas ou mais, incluindo o motorista, unicamente com motor de pistão, de ignição por compressão (diesel ou semidiesel), com volume interno de habitáculo, destinado a passageiros e motorista, superior a 6 m³, mas inferior a 9 m³" },
+        { cest: "25.002.00", ncm: "8702.40.90", descricao: "Veículos automóveis para transporte de 10 pessoas ou mais, incluindo o motorista, unicamente com motor elétrico para propulsão, com volume interno de habitáculo, destinado a passageiros e motorista, superior a 6 m³, mas inferior a 9 m³" },
+        { cest: "25.003.00", ncm: "8703.21.00", descricao: "Automóveis unicamente com motor de pistão alternativo de ignição por centelha (faísca), de cilindrada não superior a 1000 cm³" },
+        { cest: "25.004.00", ncm: "8703.22.10", descricao: "Automóveis unicamente com motor de pistão alternativo de ignição por centelha (faísca), de cilindrada superior a 1000 cm³, mas não superior a 1500 cm³, com capacidade de transporte de pessoas sentadas inferior ou igual a 6, incluído o condutor, exceto carro celular" },
+        { cest: "25.005.00", ncm: "8703.22.90", descricao: "Outros automóveis unicamente com motor de pistão alternativo de ignição por centelha (faísca), de cilindrada superior a 1000 cm³, mas não superior a 1500 cm³, exceto carro celular" },
+        { cest: "25.029.00", ncm: "8703.80.00", descricao: "Outros veículos, equipados unicamente com motor elétrico para propulsão" },
+        { cest: "25.032.00", ncm: "8704.60.00", descricao: "Outros veículos para transporte de mercadorias, unicamente com motor elétrico para propulsão, exceto veículo de peso em carga máxima superior a 3,9 toneladas" },
+
+        // ANEXO XXV - VEÍCULOS DUAS RODAS
+        { cest: "26.001.00", ncm: "8711", descricao: "Motocicletas (incluídos os ciclomotores) e outros ciclos equipados com motor auxiliar, mesmo com carro lateral, exceto os classificados no CEST 26.001.01; carros laterais." },
+        { cest: "26.001.01", ncm: "8711", descricao: "Bicicletas e outros ciclos (incluídos os triciclos) com propulsão de motor elétrico auxiliar assistido pela força humana." },
+
+        // ANEXO XXVI - PORTA A PORTA
+        { cest: "28.001.00", ncm: "3303.00.10", descricao: "Perfumes (extratos)" },
+        { cest: "28.002.00", ncm: "3303.00.20", descricao: "Águas-de-colônia" },
+        { cest: "28.003.00", ncm: "3304.10.00", descricao: "Produtos de maquiagem para os lábios" },
+        { cest: "28.004.00", ncm: "3304.20.10", descricao: "Sombra, delineador, lápis para sobrancelhas e rímel" },
+        { cest: "28.005.00", ncm: "3304.20.90", descricao: "Outros produtos de maquiagem para os olhos" },
+        { cest: "28.006.00", ncm: "3304.30.00", descricao: "Preparações para manicuros e pedicuros" },
+        { cest: "28.007.00", ncm: "3304.91.00", descricao: "Pós para maquiagem, incluindo os compactos" },
+        { cest: "28.008.00", ncm: "3304.99.10", descricao: "Cremes de beleza, cremes nutritivos e loções tônicas" },
+        { cest: "28.009.00", ncm: "3304.99.90", descricao: "Outros produtos de beleza ou de maquiagem preparados e preparações para conservação ou cuidados da pele, exceto as preparações antissolares e os bronzeadores" },
+        { cest: "28.010.00", ncm: "3304.99.90", descricao: "Preparações antissolares e os bronzeadores" },
+        { cest: "28.011.00", ncm: "3305.10.00", descricao: "Xampus para o cabelo" },
+        { cest: "28.012.00", ncm: "3305.20.00", descricao: "Preparações para ondulação ou alisamento, permanentes, dos cabelos" },
+        { cest: "28.013.00", ncm: "3305.90.00", descricao: "Outras preparações capilares" },
+        { cest: "28.014.00", ncm: "3305.90.00", descricao: "Tintura para o cabelo" },
+        { cest: "28.015.00", ncm: "3307.10.00", descricao: "Preparações para barbear (antes, durante ou após)" },
+        { cest: "28.016.00", ncm: "3307.20.10", descricao: "Desodorantes (desodorizantes) corporais líquidos, exceto os classificados no CEST 28.016.01" },
+        { cest: "28.016.01", ncm: "3307.20.10", descricao: "Loções e óleos desodorantes hidratantes líquidos" },
+        { cest: "28.016.02", ncm: "3307.20.10", descricao: "Antiperspirantes líquidos" },
+        { cest: "28.017.00", ncm: "3307.20.90", descricao: "Outros desodorantes (desodorizantes) corporais, exceto os classificados no CEST 28.017.01" },
+        { cest: "28.017.01", ncm: "3307.20.90", descricao: "Outras loções e óleos desodorantes hidratantes" },
+        { cest: "28.017.02", ncm: "3307.20.90", descricao: "Outros antiperspirantes" },
+        { cest: "28.018.00", ncm: "3307.90.00", descricao: "Outros produtos de perfumaria ou de toucador preparados" },
+        { cest: "28.019.00", ncm: "3307.90.00", descricao: "Outras preparações cosméticas" },
+        { cest: "28.020.00", ncm: "3401.11.90", descricao: "Sabões de toucador em barras, pedaços ou figuras moldados, exceto CEST 28.020.01" },
+        { cest: "28.020.01", ncm: "3401.11.90", descricao: "Lenços umedecidos" },
+        { cest: "28.021.00", ncm: "3401.19.00", descricao: "Outros sabões, produtos e preparações orgânicos tensoativos, inclusive papel, pastas (ouates), feltros e falsos tecidos, impregnados, revestidos ou recobertos de sabão ou de detergentes" },
+        { cest: "28.022.00", ncm: "3401.20.10", descricao: "Sabões de toucador sob outras formas" },
+        { cest: "28.023.00", ncm: "3401.30.00", descricao: "Produtos e preparações orgânicos tensoativos para lavagem da pele, em forma de líquido ou de creme, acondicionados para venda a retalho, mesmo contendo sabão" },
+        { cest: "28.024.00", ncm: "4818.20.00", descricao: "Lenços de papel, incluindo os de desmaquiar" },
+        { cest: "28.024.01", ncm: "4818.20.00", descricao: "Toalhas de mão" },
+        { cest: "28.025.00", ncm: "8214.10.00", descricao: "Apontadores de lápis para maquiagem" },
+        { cest: "28.025.01", ncm: "8214.10.00", descricao: "Espátulas, abre-cartas e raspadeiras" },
+        { cest: "28.025.02", ncm: "8214.10.00", descricao: "Lâminas de espátulas, de abre-cartas, de raspadeiras e de apontadores de lápis" },
+        { cest: "28.026.00", ncm: "8214.20.00", descricao: "Utensílios e sortidos de utensílios de manicuros ou de pedicuros (incluindo as limas para unhas)" },
+        { cest: "28.027.00", ncm: "9603.29.00", descricao: "Escovas e pincéis de barba, escovas para cabelos, para cílios ou para unhas e outras escovas de toucador de pessoas" },
+        { cest: "28.027.01", ncm: "9603.29.00", descricao: "Vassouras e escovas, mesmo constituindo partes de máquinas, de aparelhos ou de veículos, vassouras mecânicas de uso manual não motorizadas, pincéis e espanadores; cabeças preparadas para escovas, pincéis e artigos semelhantes; bonecas e rolos para pintura; rodos de borracha ou de matérias flexíveis semelhantes, outros" },
+        { cest: "28.028.00", ncm: "9603.30.00", descricao: "Pincéis para aplicação de produtos cosméticos" },
+        { cest: "28.028.01", ncm: "9603.30.00", descricao: "Pincéis e escovas, para artistas e pincéis de escrever" },
+        { cest: "28.029.00", ncm: "9616.10.00", descricao: "Vaporizadores de toucador, suas armações e cabeças de armações" },
+        { cest: "28.030.00", ncm: "9616.20.00", descricao: "Borlas ou esponjas para pós ou para aplicação de outros cosméticos ou de produtos de toucador" },
+        { cest: "28.031.00", ncm: "4202.1", descricao: "Malas e maletas de toucador" },
+        { cest: "28.032.00", ncm: "9615", descricao: "Pentes, travessas para cabelo e artigos semelhantes; grampos (alfinetes) para cabelo; pinças (pinceguiches), onduladores, bobs (rolos) e artefatos semelhantes para penteados, e suas partes" },
+        { cest: "28.033.00", ncm: "3923.30.90 3924.10.00 3924.90.00 4014.90.90 7013", descricao: "Mamadeiras" },
+        { cest: "28.034.00", ncm: "4014.90.90", descricao: "Chupetas e bicos para mamadeiras e para chupetas" },
+        { cest: "28.035.00", ncm: "1211.90.90", descricao: "Outras plantas e partes, para perfumaria, medicina e semelhantes" },
+        { cest: "28.036.00", ncm: "3926.20.00", descricao: "Vestuário e seus acessórios, de plásticos, inclusive luvas" },
+        { cest: "28.037.00", ncm: "3926.40.00", descricao: "Estatuetas e outros objetos de ornamentação, de plásticos" },
+        { cest: "28.038.00", ncm: "3926.90.90", descricao: "Outras obras de plásticos" },
+        { cest: "28.039.00", ncm: "4202.22.10", descricao: "Bolsas de folhas de plástico" },
+        { cest: "28.040.00", ncm: "4202.22.20", descricao: "Bolsas de matérias têxteis" },
+        { cest: "28.041.00", ncm: "4202.29.00", descricao: "Bolsas de outras matérias" },
+        { cest: "28.042.00", ncm: "4202.39.00", descricao: "Artigos de bolsos/bolsas, de outras matérias" },
+        { cest: "28.043.00", ncm: "4202.92.00", descricao: "Outros artefatos, de folhas de plásticos ou matérias têxteis" },
+        { cest: "28.044.00", ncm: "4202.99.00", descricao: "Outros artefatos, de outras matérias" },
+        { cest: "28.045.00", ncm: "4819.20.00", descricao: "Caixas e cartonagens, dobráveis, de papel/cartão, não ondulados" },
+        { cest: "28.046.00", ncm: "4819.40.00", descricao: "Outros sacos, bolsas e cartuchos, de papel ou cartão" },
+        { cest: "28.047.00", ncm: "4821.10.00", descricao: "Etiquetas de papel ou cartão, impressas" },
+        { cest: "28.048.00", ncm: "4911.10.90", descricao: "Outros impressos publicitários, catálogos comerciais e semelhantes" },
+        { cest: "28.049.00", ncm: "6115.99.00", descricao: "Outras meias de malha de outras matérias têxteis" },
+        { cest: "28.050.00", ncm: "6217.10.00", descricao: "Outros acessórios confeccionados, de vestuário" },
+        { cest: "28.051.00", ncm: "6302.60.00", descricao: "Roupas de toucador/cozinha, de tecidos atoalhados de algodão" },
+        { cest: "28.052.00", ncm: "6307.90.90", descricao: "Outros artefatos têxteis confeccionados" },
+        { cest: "28.053.00", ncm: "6506.99.00", descricao: "Chapéus e outros artefatos de outras matérias, exceto de malha" },
+        { cest: "28.054.00", ncm: "9505.90.00", descricao: "Artigos para outras festas, carnaval ou outros divertimentos" },
+        { cest: "28.055.00", ncm: "Capítulo 33", descricao: "Produtos destinados à higiene bucal" },
+        { cest: "28.056.00", ncm: "Capítulos 33 e 34", descricao: "Outros produtos cosméticos e de higiene pessoal não relacionados em outros itens deste anexo" },
+        { cest: "28.057.00", ncm: "Capítulos 14, 39, 40, 44, 48, 63, 64, 65, 67, 70, 82, 90 e 96", descricao: "Outros artigos destinados a cuidados pessoais não relacionados em outros itens deste anexo" },
+        { cest: "28.058.00", ncm: "Capítulos 39, 42, 48, 52, 61, 71, 83, 90 e 91", descricao: "Acessórios (por exemplo, bijuterias, relógios, óculos de sol, bolsas, mochilas, frasequeras, carteiras, porta-cartões, porta-documentos, porta-celulares e embalagens presenteáveis (por exemplo, caixinhas de papel), entre outros itens assemelhados)" },
+        { cest: "28.059.00", ncm: "Capítulos 61, 62 e 64", descricao: "Vestuário e seus acessórios; calçados, polainas e artefatos semelhantes, e suas partes" },
+        { cest: "28.060.00", ncm: "Capítulos 42, 52, 55, 58, 63 e 65", descricao: "Outros artigos de vestuário em geral, exceto os relacionados no item anterior" },
+        { cest: "28.061.00", ncm: "Capítulos 39, 40, 52, 56, 62, 63, 66, 69, 70, 73, 76, 82, 83, 84, 91, 94 e 96", descricao: "Artigos de casa" },
+        { cest: "28.062.00", ncm: "Capítulos 13 e 15 a 23", descricao: "Produtos das indústrias alimentares e bebidas" },
+        { cest: "28.063.00", ncm: "Capítulos 22, 27, 28, 29, 33, 34, 35, 38, 39, 63, 68, 73, 84, 85 e 96", descricao: "Produtos de limpeza e conservação doméstica" },
+        { cest: "28.064.00", ncm: "Capítulos 39, 49, 95, 96", descricao: "Artigos infantis" },
+        { cest: "28.999.00", ncm: "Outros", descricao: "Outros produtos comercializados pelo sistema de marketing direto porta-a-porta a consumidor final não relacionados em outros itens deste anexo" }
+      ];
+
+      // Elementos DOM
+      const ncmInput = document.getElementById('ncmInput');
+      const descInput = document.getElementById('descInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const tbody = document.querySelector('#resultTable tbody');
+      const totalSpan = document.getElementById('totalRecords');
+      const resultCountSpan = document.getElementById('resultCount');
+
+      function normalizeText(str) {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+      }
+
+      function filterData() {
+        const ncmQuery = normalizeText(ncmInput.value);
+        const descQuery = normalizeText(descInput.value);
+        
+        let filtered = CEST_DATA;
+        
+        if (ncmQuery) {
+          filtered = filtered.filter(item => {
+            const ncmClean = normalizeText(item.ncm.replace(/\./g, '').replace(/\s+/g, ''));
+            const queryClean = ncmQuery.replace(/\./g, '').replace(/\s+/g, '');
+            return ncmClean.includes(queryClean) || normalizeText(item.ncm).includes(ncmQuery);
+          });
+        }
+        
+        if (descQuery) {
+          filtered = filtered.filter(item => normalizeText(item.descricao).includes(descQuery));
+        }
+        
+        return filtered;
+      }
+
+      function renderTable(data) {
+        tbody.innerHTML = '';
+        if (data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" class="empty-message">Nenhum resultado encontrado para os filtros informados.</td></tr>`;
+          resultCountSpan.textContent = '';
+          return;
+        }
+        
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><span class="cest-code">${item.cest}</span></td>
+            <td><span class="ncm-code">${item.ncm}</span></td>
+            <td>${item.descricao}</td>
+          `;
+          row.style.cursor = 'pointer';
+          row.addEventListener('click', () => {
+            document.querySelectorAll('tbody tr').forEach(r => r.style.background = '');
+            row.style.background = '#e6f0ff';
+          });
+          tbody.appendChild(row);
+        });
+        
+        resultCountSpan.textContent = `✅ ${data.length} registro(s) encontrado(s)`;
+      }
+
+      function updateTotal() {
+        totalSpan.textContent = CEST_DATA.length;
+      }
+
+      function performSearch() {
+        const results = filterData();
+        renderTable(results);
+      }
+
+      searchBtn.addEventListener('click', performSearch);
+      
+      clearBtn.addEventListener('click', () => {
+        ncmInput.value = '';
+        descInput.value = '';
+        renderTable(CEST_DATA);
+        resultCountSpan.textContent = '';
+        ncmInput.focus();
+      });
+
+      // Permitir busca ao pressionar Enter
+      [ncmInput, descInput].forEach(input => {
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') performSearch();
+        });
+      });
+
+      // Inicialização
+      updateTotal();
+      renderTable(CEST_DATA.slice(0, 50)); // Mostra primeiros 50 por padrão para performance
+      // Para exibir todos, descomente a linha abaixo:
+      // renderTable(CEST_DATA);
+      
+      // Ajuste pequeno para mostrar todos ao carregar se preferir:
+      window.addEventListener('load', () => {
+        renderTable(CEST_DATA.slice(0, 80));
+      });
+
+    })();
+  </script>
+</body>
+</html>
