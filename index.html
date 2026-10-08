@@ -8,27 +8,32 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1428'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
 <style>
 :root{
-  --bg:#0A1428; --bg2:#101D36; --card:#FFFFFF; --ink:#0F2A44; --muted:#5B6B7F;
-  --muted-dark:#A9B4C8; --line:#E6EAF0; --blue:#2563EB; --navy:#0F2F57;
+  --bg:#f4f2ec; --bg2:#f4f2ec; --card:#FFFFFF; --ink:#1e2a38; --muted:#5d6e80;
+  --muted-dark:#cdd9e8; --line:#dce4ec; --blue:#2563EB; --navy:#0f2a44; --navy2:#1a3a5c;
+  --gold:#c9a227; --gold-2:#a8861b; --goldbg:#faf5e8;
   --green-bg:#ECFDF5; --green-bd:#A9E8C8; --green-ink:#065F46;
   --amber-bg:#FFFBEB; --amber-bd:#FDE68A; --amber-ink:#92400E;
-  --radius:16px;
+  --radius:14px; --shadow:0 8px 24px rgba(15,42,68,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Segoe UI',Roboto,system-ui,-apple-system,'Helvetica Neue',sans-serif;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+body{font-family:Georgia,"Times New Roman",serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
 .skip{position:absolute;left:-9999px;top:0;background:#fff;color:#000;padding:.6rem 1rem;z-index:99;border-radius:0 0 10px 0}
 .skip:focus{left:0}
-.top{max-width:1180px;margin:0 auto;width:100%;padding:2.2rem 1.5rem 1.2rem;text-align:center}
-.pill{display:inline-block;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#E2E8F0;font-size:.82rem;padding:.45rem 1.1rem;border-radius:999px;margin-bottom:1.2rem}
-.top h1{color:#fff;font-size:2.4rem;font-weight:800;letter-spacing:-.5px;line-height:1.15}
+.top{width:100%;background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);border-bottom:4px solid var(--gold);padding:2.2rem 1.5rem 1.6rem;text-align:center;position:relative}
+.gh-btn{position:absolute;top:1rem;right:1.2rem;background:transparent;color:#fff;border:1px solid #fff;border-radius:9px;padding:.4rem .8rem;font-size:.82rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;font-family:inherit}
+.gh-btn:hover{background:#fff;color:var(--navy)}
+.gh-btn svg{width:14px;height:14px}
+@media(max-width:640px){.gh-btn{position:static;margin-bottom:1rem}}
+.pill{display:inline-block;background:var(--gold);border:1px solid var(--gold);color:var(--navy);font-size:.82rem;font-weight:700;padding:.45rem 1.1rem;border-radius:999px;margin-bottom:1.2rem}
+.top h1{color:#fff;font-size:2.4rem;font-weight:800;letter-spacing:-.5px;line-height:1.15;font-family:Georgia,"Times New Roman",serif;max-width:900px;margin-left:auto;margin-right:auto}
 .top .sub{color:var(--muted-dark);max-width:840px;margin:1rem auto 0;font-size:1.02rem;line-height:1.65}
 .badge-no{display:inline-block;margin-top:.9rem;font-size:.78rem;font-weight:700;background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;padding:.3rem .9rem;border-radius:999px}
 .main{max-width:1180px;margin:1.5rem auto 0;padding:0 1.5rem;width:100%;flex:1}
 .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1.4rem}
 @media(max-width:900px){.grid{grid-template-columns:1fr}.top h1{font-size:1.7rem}}
-.card{background:var(--card);border-radius:var(--radius);padding:1.7rem 1.7rem 1.5rem;box-shadow:0 18px 40px -18px rgba(0,0,0,.5);border:1px solid #E9EEF2}
-.card h2{font-size:1.2rem;color:var(--ink);display:flex;align-items:center;gap:.55rem;padding-bottom:.9rem;border-bottom:1px solid var(--line);margin-bottom:1.2rem}
+.card{background:var(--card);border-radius:var(--radius);padding:1.7rem 1.7rem 1.5rem;box-shadow:var(--shadow);border:1px solid var(--line);border-top:3px solid var(--gold)}
+.card h2{font-family:Georgia,"Times New Roman",serif;font-size:1.2rem;color:var(--navy);display:flex;align-items:center;gap:.55rem;padding-bottom:.9rem;padding-left:.6rem;border-bottom:1px solid var(--line);border-left:4px solid var(--gold);margin-bottom:1.2rem}
 .card h2 .ic{color:var(--blue);font-size:1.25rem}
 .field{margin-bottom:1rem}
 .field label{display:block;font-weight:700;font-size:.88rem;margin-bottom:.4rem;color:#1E293B}
@@ -42,6 +47,7 @@ body{font-family:'Segoe UI',Roboto,system-ui,-apple-system,'Helvetica Neue',sans
 .btn:hover{filter:brightness(1.12)}
 .btn.out{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
 .btn.ghost{background:#F1F5F9;color:var(--ink);border:1px solid var(--line)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .alert{border-radius:12px;padding:.95rem 1.05rem;font-size:.9rem;line-height:1.6;margin-bottom:1rem;border:1px solid}
 .alert.ok{background:var(--green-bg);border-color:var(--green-bd);color:var(--green-ink)}
 .alert.warn{background:var(--amber-bg);border-color:var(--amber-bd);color:var(--amber-ink)}
@@ -68,13 +74,31 @@ mark{background:#FEF08A;border-radius:4px;padding:0 2px}
 .sitV{font-size:.72rem;font-weight:800;color:#065F46;background:#ECFDF5;border:1px solid #A9E8C8;border-radius:999px;padding:.15rem .55rem;white-space:nowrap}.sitR{font-size:.72rem;font-weight:800;color:#991B1B;background:#FEF2F2;border:1px solid #FECACA;border-radius:999px;padding:.15rem .55rem;white-space:nowrap}.alt{font-size:.75rem;color:#475569}.empty{text-align:center;padding:2.2rem;color:#64748B;background:#F8FAFC}
 details{margin-top:1rem;font-size:.85rem;color:#334155;background:#F8FAFC;border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem}
 details summary{cursor:pointer;font-weight:700}
-footer{background:rgba(0,0,0,.25);border-top:1px solid rgba(255,255,255,.12);color:#94A3B8;text-align:center;font-size:.8rem;padding:1.4rem 1rem;line-height:1.7;margin-top:2rem}
-footer a{color:#E2E8F0}
+.footer{background:#0f2a44;color:#cdd9e8;margin-top:20px;border-top:4px solid #c9a227}
+.footer strong{color:#fff}
+.footer strong.ft{font-family:Georgia,"Times New Roman",serif}
+.footer a{color:#fff}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1.4fr;gap:20px;padding-top:26px;padding-bottom:10px;max-width:1180px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
+.footer .donate-code{font-family:Consolas,monospace;font-size:12px;background:rgba(255,255,255,.1);padding:2px 6px;border-radius:6px;word-break:break-all}
+.footer .reveal-link{color:#c9a227;font-size:12px}
+.contact-icons{display:flex;gap:10px;margin-top:10px}
+.contact-icons a{width:40px;height:40px;display:grid;place-items:center;border:1px solid #c9a227;border-radius:50%;color:#c9a227}
+.contact-icons a:hover{background:#c9a227;color:#0f2a44}
+.contact-icons svg{width:20px;height:20px}
+.btn-outline-l{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:9px;padding:4px 8px;font-size:12px;margin-left:6px;cursor:pointer;font-family:inherit}
+.btn-outline-l:hover{background:#fff;color:#0f2a44}
+.footer-base{border-top:1px solid rgba(255,255,255,.15);padding-top:12px;padding-bottom:18px;text-align:center;max-width:1180px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
+.footer-base small,.footer small{color:#9db1c7}
+.footer p{margin:.5rem 0;line-height:1.6}
+.footer ul{list-style:none;margin:.5rem 0;padding:0;line-height:2}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr}}
+@media print{.footer{display:none}}
 </style>
 </head>
 <body>
 <a class="skip" href="#consulta">Pular para a consulta</a>
 <div class="top">
+  <a class="gh-btn" href="https://github.com/silvioalbqrq" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
   <span class="pill">Convênio ICMS 142/2018 (DOU 19/12/2018) · Anexos II a XXVI · Atualizado até Conv. ICMS 107/26</span>
   <h1>Consulta CEST &amp; NCM/SH</h1>
   <p class="sub">Ferramenta informativa para localizar o Código Especificador da Substituição Tributária a partir da NCM/SH ou da descrição da mercadoria, com base nos Anexos II a XXVI do Convênio ICMS 142/18 e alterações posteriores. <strong>Em caso de divergência, prevalece a descrição do convênio e a legislação da UF.</strong></p>
@@ -154,9 +178,32 @@ footer a{color:#E2E8F0}
     </div>
   </section>
 </main>
-<footer>
-  Conselho Nacional de Política Fazendária – CONFAZ · Convênio ICMS 142/18, de 14/12/2018 · DOU 19/12/2018.<br>
-  Página informativa sem vínculo oficial · Verifique o texto vigente no CONFAZ e na SEFAZ da UF · Base local: 1.035 registros (II a XXVI) · Conferência: 23/09/2026.
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <strong class="ft">Consulta CEST &amp; NCM</strong>
+      <p><small>Localize o CEST pela NCM ou descri&ccedil;&atilde;o. Ferramenta educacional &mdash; n&atilde;o substitui parecer t&eacute;cnico ou assessoria cont&aacute;bil.</small></p>
+      <div class="contact-icons">
+        <a href="https://wa.me/5585998206642?text=Ol%C3%A1%2C%20vim%20pelo%20site%20Consulta%20CEST" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="mailto:silvio.albqrq@gmail.com" aria-label="E-mail" title="E-mail"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        <a href="https://github.com/silvioalbqrq" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <strong>Contato</strong>
+      <ul>
+        <li><a href="https://wa.me/5585998206642?text=Ol%C3%A1%2C%20vim%20pelo%20site%20Consulta%20CEST" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="mailto:silvio.albqrq@gmail.com">E-mail</a></li>
+        <li><a href="https://github.com/silvioalbqrq" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <strong>Doa&ccedil;&otilde;es</strong>
+      <p><small>Pix:</small> <code class="donate-code" id="pix-chave">8eea81fc&hellip;da37f</code><button class="btn-outline-l" type="button" data-copy data-full="8eea81fc-cb40-4150-91fa-6ca829ada37f">Copiar</button> <a href="#" class="reveal-link" data-reveal data-target="pix-chave" data-short="8eea81fc…da37f" data-full="8eea81fc-cb40-4150-91fa-6ca829ada37f">ver completa</a></p>
+      <p><small>Lightning:</small> <code class="donate-code" id="ln-address">lnbc1p4&hellip;paewhvg (invoice &uacute;nica)</code><button class="btn-outline-l" type="button" data-copy data-full="lnbc1p4tt3ccpp5fntekr0ya4r4zd6durklrznte0zsg5jv3zcv83sss4u4efd8d7gsdqqcqzzsxqrrsssp5xg8m0ydtzqprnym2ruqp4260au726czc86p5y2mpl575mp8avdcs9qxpqysgqsjawffjrlkwpa77wf9zvsjx99z833h0dvjqjh0nxqph75rrkghrhzrfwdhj0fqt57l0nwl69c2sgutmm40mgzhkmqy9dpzcje69u09qpaewhvg">Copiar</button> <a href="#" class="reveal-link" data-reveal data-target="ln-address" data-short="lnbc1p4…paewhvg (invoice única)" data-full="lnbc1p4tt3ccpp5fntekr0ya4r4zd6durklrznte0zsg5jv3zcv83sss4u4efd8d7gsdqqcqzzsxqrrsssp5xg8m0ydtzqprnym2ruqp4260au726czc86p5y2mpl575mp8avdcs9qxpqysgqsjawffjrlkwpa77wf9zvsjx99z833h0dvjqjh0nxqph75rrkghrhzrfwdhj0fqt57l0nwl69c2sgutmm40mgzhkmqy9dpzcje69u09qpaewhvg">ver completa</a></p>
+    </div>
+  </div>
+  <div class="footer-base"><small>&copy; 2026 Consulta CEST &middot; Base: Conv&ecirc;nio ICMS 142/18 &middot; Ferramenta educacional.</small></div>
 </footer>
 <script>
 const CEST_DATA = [
@@ -1241,6 +1288,9 @@ anexoSel.addEventListener('change',()=>buscar(true));
 vigSel.addEventListener('change',()=>buscar(true));
 document.getElementById('csvBtn').addEventListener('click',()=>{const rows=[["anexo","item","cest","ncm","descricao","situacao","alterador"]].concat(filtrados.map(x=>['"'+anexoDe(x.cest)+'"','"'+(x.item||"")+'"','"'+x.cest+'"','"'+x.ncm+'"','"'+String(x.descricao).replace(/"/g,'""')+'"','"'+((x.sit||"V")==="R"?"REVOGADO":"VIGENTE")+'"','"'+(x.alt||"")+'"']));const blob=new Blob(["\ufeff"+rows.map(r=>r.join(";")).join("\n")],{type:"text/csv;charset=utf-8"});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="consulta-cest.csv";a.click();});
 totalEl.textContent=CEST_DATA.length;filtrados=filtrar();render();
+/* Rodape Hub Fiscal: copiar doacoes + revelar chave completa */
+document.querySelectorAll('[data-copy]').forEach(function(btn){btn.addEventListener('click',function(){var full=btn.getAttribute('data-full')||'';function ok(){var t=btn.textContent;btn.textContent='Copiado!';setTimeout(function(){btn.textContent=t;},1500);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(full).then(ok,ok);}else{var ta=document.createElement('textarea');ta.value=full;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);ok();}});});
+document.querySelectorAll('[data-reveal]').forEach(function(link){link.addEventListener('click',function(e){e.preventDefault();var target=document.getElementById(link.getAttribute('data-target'));if(!target)return;var showing=link.getAttribute('data-open')==='1';if(showing){target.textContent=link.getAttribute('data-short');link.textContent='ver completa';link.setAttribute('data-open','0');}else{target.textContent=link.getAttribute('data-full');link.textContent='ocultar';link.setAttribute('data-open','1');}});});
 </script>
 </body>
 </html>
